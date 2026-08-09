@@ -1,9 +1,10 @@
 backend:
   name: github
-  repo: MiguelHG09/decante-hn # Tu usuario y el nombre de tu repositorio
+  repo: MiguelHG09/decante-hn
   branch: main
+  base_url: "https://decante-hn.pages.dev"
 
-media_folder: "public/images" # Donde se guardarán las fotos que él suba
+media_folder: "public/images" # Donde se guardan las fotos que él suba
 public_folder: "/images" # La ruta web de las fotos
 
 collections:
