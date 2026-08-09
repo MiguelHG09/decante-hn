@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import combos from '../data/combos.json';
+import productos from '../data/productos.json';
+
+// Lógica relacional: Unir los combos con los datos reales del catálogo
+const combosMapeados = combos.map(combo => {
+    const itemsCompletos = combo.productos_incluidos.map(itemRel => {
+        const prodData = productos.find(p => p.id === itemRel.id);
+        return { ...prodData, tamaño_incluido: itemRel.tamaño_incluido };
+    });
+    return { ...combo, items: itemsCompletos };
+});
+---
+
+<Layout title="Descubre Tu Esencia">
+    <!-- Hero Section -->
+    <section class="relative w-full h-[80vh] flex items-center justify-center bg-[#f0eded]">
+        <div class="absolute inset-0 z-0">
+            <div class="bg-cover bg-center w-full h-full" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1200&auto=format&fit=crop')"></div>
+            <div class="absolute inset-0 bg-[#fcf9f8]/30 backdrop-blur-[2px]"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-5 max-w-3xl flex flex-col items-center">
+            <h1 class="font-serif text-[48px] md:text-[64px] font-bold text-primary mb-8 tracking-tight leading-tight">Descubre Tu Esencia</h1>
+            <a href="/catalogo" class="bg-primary-container text-on-primary font-sans text-[14px] font-semibold uppercase tracking-wider py-4 px-8 hover:bg-primary transition-colors duration-300 inline-block border border-transparent">
+                Explorar Colección
+            </a>
+        </div>
+    </section>
+
+    <!-- Combos Especiales Section -->
+    <section class="py-[120px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="font-serif text-[48px] font-semibold text-primary mb-8 text-center">Combos Especiales</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            {combosMapeados.map((combo) => (
+                <div class="group flex flex-col bg-surface-container-low border border-outline-variant relative">
+                    <!-- Foto del Combo -->
+                    <div class="w-full aspect-square overflow-hidden relative">
+                        <img src={combo.imagen} alt={combo.nombre} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
+                    </div>
+                    
+                    <!-- Detalles y Relaciones -->
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-serif text-[28px] text-primary mb-2">{combo.nombre}</h3>
+                        <p class="font-sans text-[14px] text-on-surface-variant mb-6">{combo.descripcion}</p>
+                        
+                        <!-- Lista de Perfumes Incluidos con Links Mágicos -->
+                        <div class="mb-6 space-y-2 border-l-2 border-primary-container pl-4">
+                            <span class="font-sans text-[12px] font-semibold uppercase tracking-widest text-secondary block mb-3">Incluye:</span>
+                            {combo.items.map(item => (
+                                <a href={`/producto/${item.id}`} class="block group/link">
+                                    <p class="font-sans text-[15px] font-medium text-primary group-hover/link:underline decoration-1 underline-offset-2">
+                                        {item.marca} {item.nombre}
+                                    </p>
+                                    <p class="font-sans text-[13px] text-secondary">{item.tamaño_incluido}</p>
+                                </a>
+                            ))}
+                        </div>
+
+                        <!-- Precio y Botón de WHA directo -->
+                        <div class="mt-auto pt-4 flex items-center justify-between border-t border-outline-variant">
+                            <p class="font-sans text-[22px] font-bold text-primary">L. {combo.precio_total}</p>
+                            
+                            <button 
+                                class="add-combo-btn bg-primary-container text-white px-4 py-2 font-sans text-[12px] uppercase font-semibold tracking-wider hover:bg-primary transition-colors cursor-pointer"
+                                data-id={combo.id}
+                                data-nombre={combo.nombre}
+                                data-precio={combo.precio_total}
+                                data-imagen={combo.imagen}
+                            >
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import { addCartItem } from '../store/cartStore.js';
+
+    document.querySelectorAll('.add-combo-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const button = e.currentTarget;
+            addCartItem({
+                id: button.dataset.id,
+                nombre: button.dataset.nombre,
+                imagen: button.dataset.imagen,
+                tamaño: "Paquete Completo", // Tamaño genérico para combos
+                precio: parseInt(button.dataset.precio),
+                cantidad: 1
+            });
+            document.getElementById('cart-sidebar').classList.remove('translate-x-full');
+            document.getElementById('cart-overlay').classList.remove('hidden');
+        });
+    });
+</script>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oud Wood - Decanté HN</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#255022",
+                        "background": "#fcf9f8",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#3d6838",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "primary": "#001501",
+                        "outline": "#72796e",
+                        "on-primary-fixed": "#002202",
+                        "tertiary-container": "#242623",
+                        "on-surface": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "primary-fixed-dim": "#a2d398",
+                        "on-secondary-fixed-variant": "#454746",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#0f110e",
+                        "primary-container": "#002d04",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-background": "#1c1b1b",
+                        "surface-dim": "#dcd9d9",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c2c9bc",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-container": "#636563",
+                        "secondary-fixed": "#e2e3e1",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary": "#5d5f5d",
+                        "primary-fixed": "#bdf0b2",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-variant": "#e5e2e1",
+                        "on-surface-variant": "#42493f",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-primary": "#a2d398",
+                        "secondary-container": "#e2e3e1",
+                        "on-primary-container": "#6a9862",
+                        "on-tertiary-fixed-variant": "#464744",
+                        "inverse-surface": "#313030",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#8c8d89",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "tertiary-fixed": "#e3e3de",
+                        "on-secondary-fixed": "#1a1c1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-md": ["Montserrat"],
+                        "price-display": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "price-display": ["20px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #fcf9f8; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed uppercase tracking-wider">
+                Decanté HN
+            </div>
+<nav class="hidden md:flex gap-8">
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase" href="#">Inicio</a>
+<a class="text-primary dark:text-primary-fixed border-b border-primary dark:border-primary-fixed pb-1 font-bold hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase" href="#">Catálogo</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase" href="#">Información</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase" href="#">Contáctanos</a>
+</nav>
+<div class="flex items-center gap-4 cursor-pointer transition-opacity duration-200 active:opacity-70">
+<span class="material-symbols-outlined text-primary hover:text-primary-container" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Product Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-section-gap">
+<!-- Image Area -->
+<div class="bg-surface-container aspect-square relative flex items-center justify-center p-8">
+<img alt="Oud Wood Bottle" class="w-full h-full object-contain mix-blend-multiply" data-alt="A high-end product photography shot of a sleek, dark glass perfume bottle labeled 'Oud Wood'. The bottle is centered on a minimalist, off-white gallery podium. Soft, high-key studio lighting highlights the sharp edges of the bottle, creating an elegant, quiet luxury aesthetic. The background is a clean, bright white space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx4Xg8WqaTdVRDTodCtEeERZw1gyd_hibVY3LuKudDFqY4ujY_ouLEqJBb8m6zoWjUgKlgT_gTxbdo_3VMl2evb4BWLHsPZmrgx-ObkVeLJNl9766D2ZWgeAB_JHftl8dsTBDuwpqIBmeYBAOiO4g6uKqIRjjy82rdK7qKea0jBq8zG0BU2f1DHtwPn_b-m4avex5QhGPHce0IFgZvj4lx6wuto9CKe1MpHa9F22y5uEGf8I9AEKTznw"/>
+</div>
+<!-- Details Area -->
+<div class="flex flex-col justify-center px-0 md:px-8">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-4">TOM FORD</span>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-6">Oud Wood</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed max-w-lg">
+                    A masterclass in quiet luxury. Rare oud wood, exotic spices, and cardamom blend seamlessly to create an intoxicating, smoky aroma. Grounded by rich sandalwood and vetiver, this is a fragrance of deliberate sophistication.
+                </p>
+<!-- Variants -->
+<div class="mb-8">
+<span class="font-label-md text-label-md text-primary uppercase block mb-4">Tamaño</span>
+<div class="flex flex-wrap gap-4">
+<button class="px-6 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container transition-colors">Botella Completa</button>
+<button class="px-6 py-3 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider border border-primary">Decant 10ml</button>
+<button class="px-6 py-3 border border-outline-variant text-secondary font-label-md text-label-md uppercase tracking-wider hover:border-primary hover:text-primary transition-colors">Decant 5ml</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-end gap-4 mt-auto">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-secondary uppercase">Cantidad</span>
+<div class="flex items-center border border-outline-variant h-14 w-32">
+<button class="flex-1 h-full text-secondary hover:text-primary transition-colors material-symbols-outlined flex items-center justify-center">remove</button>
+<span class="font-body-lg text-body-lg text-primary w-10 text-center">1</span>
+<button class="flex-1 h-full text-secondary hover:text-primary transition-colors material-symbols-outlined flex items-center justify-center">add</button>
+</div>
+</div>
+<button class="flex-1 h-14 bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary transition-colors flex items-center justify-center gap-2">
+                        Agregar al Carrito - L. 450
+                    </button>
+</div>
+</div>
+</section>
+<!-- Related Products Section -->
+<section class="mb-section-gap">
+<h2 class="font-headline-md text-headline-md text-primary mb-12 text-center">También te podría gustar</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<a class="group flex flex-col" href="#">
+<div class="bg-surface-container aspect-square mb-6 overflow-hidden flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-[1.02]">
+<img alt="Product Image" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110" data-alt="A luxurious glass perfume bottle with a golden cap, shot from a slightly low angle on a pristine white marble surface. The lighting is soft and diffused, creating a serene, high-end editorial look typical of quiet luxury branding. Minimalist composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGlGdFza_eUFI4PHragrHK0qukGXzy5_LTfT1-1e236l9E_k43n0-J82yZDgJg2cB-EMSjWkQuAWE-p5dRYEc8TaK_AZRVAXDe5Yy6lj-ko9qvNB6zwqjwMsnO3BykbkUOLPZosZks_8ABOn6TsJDea6ntOxxs84nrNqIz1HNwN1IZ1LjtbHRQ7PVk5XDFMfhMo4-aTPYw7IlCnpV3DHrcNn5ez9gcP_skvXHImNcwXD9osQY6UCMc7A"/>
+</div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">CREED</span>
+<h3 class="font-headline-md text-2xl text-primary mb-2 line-clamp-1">Aventus</h3>
+<span class="font-price-display text-price-display text-primary-container mt-auto">L. 550</span>
+</a>
+<!-- Product Card 2 -->
+<a class="group flex flex-col" href="#">
+<div class="bg-surface-container aspect-square mb-6 overflow-hidden flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-[1.02]">
+<img alt="Product Image" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110" data-alt="A sleek, minimalist cylindrical perfume bottle with a matte black finish, standing on a slightly textured light gray stone block. The scene is lit with sharp, architectural studio lighting casting a distinct shadow, emphasizing a modern, editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDANNIoVVdw9cscj0CLbimpGx91ZibSusmfWPhFSUIB0jYmiAqCzedBTQ-DQx6NYfCyIGn0c96wYjGwGdmDnO0D4FgnkkPf79h6x8W6bkLjGBYY8idIfzaWEnZQeqnDQvlGeeEX-8P0B0rPCCOJ1bZNUycHS_7L-3x4lIXY87mSaF86cXSMQqPSU5vZHk0RDYgYJPJFr_sMdN7IG3_3s9AJFoTdh346IduFHHeHSK1JP_r_ZEp2asNBDA"/>
+</div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">LE LABO</span>
+<h3 class="font-headline-md text-2xl text-primary mb-2 line-clamp-1">Santal 33</h3>
+<span class="font-price-display text-price-display text-primary-container mt-auto">L. 480</span>
+</a>
+<!-- Product Card 3 -->
+<a class="group flex flex-col" href="#">
+<div class="bg-surface-container aspect-square mb-6 overflow-hidden flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-[1.02]">
+<img alt="Product Image" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110" data-alt="A heavy, clear glass fragrance bottle showcasing amber-colored liquid inside. It rests on a simple white pedestal against a vast, bright off-white background. The lighting is pristine and bright, reflecting a sophisticated, minimalist luxury brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwuFqAEJHnil_aLqA7nTkQF1iYfuxXRWumsdBUXm4wbA4XFfS2ogzuYs9owWG3VPrU0HHMjLNkMHgfM6tl0Psjho5eVZWL4Jxf0t_IYybf6wGt-DuEa7f9apLQyUKEgrfxUsrhP1UpaO1weFAuoLZW8fFGi-NHWkJesDDRPkWUV2FugvDZYMFmxF-sonxafi79gbhevvHc-7OFSMCYsChEl7Ywuv8qwaE6bFkXxLypH5tBZvrsQxMW1g"/>
+</div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">MAISON FRANCIS</span>
+<h3 class="font-headline-md text-2xl text-primary mb-2 line-clamp-1">Baccarat Rouge</h3>
+<span class="font-price-display text-price-display text-primary-container mt-auto">L. 600</span>
+</a>
+<!-- Product Card 4 -->
+<a class="group flex flex-col" href="#">
+<div class="bg-surface-container aspect-square mb-6 overflow-hidden flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-[1.02]">
+<img alt="Product Image" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist, geometric perfume bottle design in stark white opaque glass, placed delicately on a muted silver tray. The backdrop is a clean, bright white canvas. The aesthetic is extremely clean, modern, and aligned with high-end quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFsLqT6GkEpBzJksm6PPLl-bo1yIKdpUFqPPCwQrH-OUqVhaExI7OVSE3dWZ8FObjdqIKKng3j9TdT8ID10XT6oHX_r9QJiQcQTIjcFR9qznfwCyXhPZVbtrRTEJqScMEUmEqvmH2V44rDauivIK0OpHUUdS81JiYM7_2-F1AbVDDyKw2gNbH7p4U0L49fdCYYGlWSjI0oyV2G7j-7tyf9Y-5TRE59Ru4sh42FNbj3ybKIl7OnjyCbNQ"/>
+</div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">BYREDO</span>
+<h3 class="font-headline-md text-2xl text-primary mb-2 line-clamp-1">Gypsy Water</h3>
+<span class="font-price-display text-price-display text-primary-container mt-auto">L. 420</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full border-t border-outline-variant dark:border-outline mt-auto">
+<div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-8">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed uppercase tracking-wider font-bold">
+                Decanté HN
+            </div>
+<div class="flex gap-8">
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md uppercase tracking-wider hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Facebook</a>
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md uppercase tracking-wider hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Instagram</a>
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md uppercase tracking-wider hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Pinterest</a>
+</div>
+<div class="font-body-md text-body-md text-primary dark:text-primary-fixed text-sm">
+                © 2024 Decanté HN. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

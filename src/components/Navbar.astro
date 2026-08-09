@@ -1,0 +1,58 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<!-- Banner Promocional -->
+<div class="bg-[#002d04] text-white text-center py-2 px-4 uppercase font-sans text-[10px] md:text-[12px] font-semibold tracking-widest z-50 relative">
+    ENVÍO GRATIS EN COMPRAS MAYORES A L. 1500
+</div>
+
+<!-- Navbar Principal -->
+<nav class="sticky top-0 z-40 w-full bg-[#fcf9f8] border-b border-[#c2c9bc] backdrop-blur-md bg-opacity-90">
+    <div class="max-w-[1280px] mx-auto px-5 h-[72px] flex items-center justify-between">
+        
+        <!-- Botón Menú Móvil -->
+        <button id="mobile-menu-btn" class="md:hidden text-[#1c1b1b] p-2">
+            <span class="material-symbols-outlined text-[28px]">menu</span>
+        </button>
+
+        <!-- Logo -->
+        <a href="/" class="font-serif text-[20px] md:text-[24px] font-bold text-[#001501] tracking-tight text-center flex-1 md:flex-none">
+            DECANTÉ HN
+        </a>
+
+        <!-- Links (Desktop) -->
+        <div class="hidden md:flex space-x-12">
+            <a href="/" class={`font-sans text-[13px] font-semibold tracking-[0.1em] uppercase transition-colors hover:text-[#001501] ${pathname === '/' ? 'text-[#001501] border-b-2 border-[#001501] pb-1' : 'text-[#5d5f5d]'}`}>Inicio</a>
+            <a href="/catalogo" class={`font-sans text-[13px] font-semibold tracking-[0.1em] uppercase transition-colors hover:text-[#001501] ${pathname.includes('/catalogo') ? 'text-[#001501] border-b-2 border-[#001501] pb-1' : 'text-[#5d5f5d]'}`}>Catálogo</a>
+            <a href="/informacion" class={`font-sans text-[13px] font-semibold tracking-[0.1em] uppercase transition-colors hover:text-[#001501] ${pathname.includes('/informacion') ? 'text-[#001501] border-b-2 border-[#001501] pb-1' : 'text-[#5d5f5d]'}`}>Información</a>
+            <a href="/contacto" class={`font-sans text-[13px] font-semibold tracking-[0.1em] uppercase transition-colors hover:text-[#001501] ${pathname.includes('/contacto') ? 'text-[#001501] border-b-2 border-[#001501] pb-1' : 'text-[#5d5f5d]'}`}>Contáctanos</a>
+        </div>
+
+        <!-- Botón del Carrito -->
+        <button id="cart-btn" class="relative text-[#1c1b1b] hover:text-[#002d04] transition-colors p-2 cursor-pointer">
+            <span class="material-symbols-outlined text-[28px]">shopping_cart</span>
+            <span id="cart-badge" class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-[#002d04] rounded-full hidden">0</span>
+        </button>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="md:hidden hidden bg-[#fcf9f8] border-b border-[#c2c9bc] absolute w-full left-0 top-[72px] shadow-lg">
+        <div class="flex flex-col px-5 py-4 space-y-4">
+            <a href="/" class="font-sans text-[14px] font-semibold tracking-[0.1em] uppercase text-[#1c1b1b]">Inicio</a>
+            <a href="/catalogo" class="font-sans text-[14px] font-semibold tracking-[0.1em] uppercase text-[#1c1b1b]">Catálogo</a>
+            <a href="/informacion" class="font-sans text-[14px] font-semibold tracking-[0.1em] uppercase text-[#1c1b1b]">Información</a>
+            <a href="/contacto" class="font-sans text-[14px] font-semibold tracking-[0.1em] uppercase text-[#1c1b1b]">Contáctanos</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // Lógica para abrir/cerrar el menú móvil
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileBtn?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Información y Envíos">
+    <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[120px]">
+        <header class="mb-[80px] text-center">
+            <h1 class="font-serif text-[32px] md:text-[48px] text-primary mb-4">Información y Envíos</h1>
+            <p class="font-sans text-[16px] text-secondary max-w-2xl mx-auto">Todo lo que necesitas saber sobre el proceso de decantado y nuestros servicios de entrega en Honduras.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-[120px]">
+            <!-- Columna Izquierda: ¿Qué es un decant? -->
+            <div class="md:col-span-6 bg-surface-container-low p-8 md:p-12 border border-outline-variant">
+                <h2 class="font-serif text-[32px] text-primary mb-6">¿Qué es un decant?</h2>
+                <div class="font-sans text-[16px] text-on-surface-variant space-y-4">
+                    <p>Un "decant" es el proceso cuidadoso de transferir una fragancia de su botella original a un atomizador más pequeño, manteniendo intacta su pureza y composición.</p>
+                    <p>En Decanté HN, utilizamos jeringas estériles para garantizar que cada gota mantenga sus notas olfativas originales.</p>
+                </div>
+                
+                <div class="mt-8 border-t border-outline-variant pt-8">
+                    <h3 class="font-sans text-[12px] font-semibold text-primary mb-6 uppercase tracking-[0.1em]">Beneficios</h3>
+                    <ul class="space-y-4 font-sans text-[15px] text-on-surface-variant">
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-primary-container">check</span>
+                            <span>Explora fragancias nicho a precios accesibles.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-primary-container">check</span>
+                            <span>Ideal para viajes y llevar en el bolso.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[20px] text-primary-container">check</span>
+                            <span>Garantía de autenticidad del 100%.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Tarifas -->
+            <div class="md:col-span-6 flex flex-col justify-center">
+                <h2 class="font-serif text-[32px] text-primary mb-6">Tarifas de Envío</h2>
+                <div class="border border-outline-variant w-full bg-white">
+                    <div class="flex justify-between items-center p-6 border-b border-outline-variant">
+                        <div>
+                            <h4 class="font-sans text-[14px] font-semibold text-primary mb-1 uppercase tracking-[0.1em]">Tegucigalpa</h4>
+                            <p class="font-sans text-[13px] text-secondary">Entrega en 1 Día Hábil</p>
+                        </div>
+                        <div class="font-sans text-[20px] font-medium text-primary">L. 80</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 border-b border-outline-variant">
+                        <div>
+                            <h4 class="font-sans text-[14px] font-semibold text-primary mb-1 uppercase tracking-[0.1em]">Nacional</h4>
+                            <p class="font-sans text-[13px] text-secondary">Entrega en 2-3 Días Hábiles</p>
+                        </div>
+                        <div class="font-sans text-[20px] font-medium text-primary">L. 95</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6">
+                        <div>
+                            <h4 class="font-sans text-[14px] font-semibold text-primary mb-1 uppercase tracking-[0.1em]">Roatán / Lempira</h4>
+                            <p class="font-sans text-[13px] text-secondary">Zonas Extendidas</p>
+                        </div>
+                        <div class="font-sans text-[20px] font-medium text-primary">L. 250</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

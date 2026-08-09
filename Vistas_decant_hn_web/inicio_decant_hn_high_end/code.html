@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Decanté HN - Descubre Tu Esencia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container": "#f0eded",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed-variant": "#454746",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed-dim": "#a2d398",
+                        "on-tertiary-fixed-variant": "#464744",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#e2e3e1",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "on-primary-container": "#6a9862",
+                        "on-surface-variant": "#42493f",
+                        "tertiary-fixed": "#e3e3de",
+                        "outline": "#72796e",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#255022",
+                        "outline-variant": "#c2c9bc",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "on-primary-fixed": "#002202",
+                        "on-primary": "#ffffff",
+                        "secondary": "#5d5f5d",
+                        "primary-fixed": "#bdf0b2",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-container": "#8c8d89",
+                        "primary": "#001501",
+                        "tertiary": "#0f110e",
+                        "on-secondary-container": "#636563",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-error": "#ffffff",
+                        "primary-container": "#002d04",
+                        "surface-dim": "#dcd9d9",
+                        "on-background": "#1c1b1b",
+                        "tertiary-container": "#242623",
+                        "secondary-fixed": "#e2e3e1",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface": "#1c1b1b",
+                        "inverse-primary": "#a2d398",
+                        "surface-tint": "#3d6838"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "price-display": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "price-display": ["20px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fcf9f8; }
+        .sharp-corners { border-radius: 0px !important; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md text-body-md">
+<!-- Top Announcement Banner -->
+<div class="bg-primary-container text-on-primary text-center py-2 px-4 uppercase font-label-md text-label-md tracking-widest z-50 relative">
+        ENVÍO GRATIS EN COMPRAS MAYORES A L. 1500
+    </div>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface w-full top-0 sticky border-b border-outline-variant dark:border-outline z-40">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md text-primary dark:text-primary-fixed uppercase tracking-wider" href="#">
+                Decanté HN
+            </a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex space-x-8">
+<a class="text-primary dark:text-primary-fixed border-b border-primary dark:border-primary-fixed pb-1 font-bold font-label-md text-label-md uppercase cursor-pointer transition-opacity duration-200 active:opacity-70" href="#">Inicio</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase cursor-pointer transition-opacity duration-200 active:opacity-70" href="#">Catálogo</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase cursor-pointer transition-opacity duration-200 active:opacity-70" href="#">Información</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-md text-label-md uppercase cursor-pointer transition-opacity duration-200 active:opacity-70" href="#">Contáctanos</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center space-x-4">
+<button class="text-primary dark:text-primary-fixed hover:text-primary/70 transition-colors cursor-pointer transition-opacity duration-200 active:opacity-70">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative w-full h-[80vh] flex items-center justify-center">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="A highly detailed, ultra-realistic editorial photograph of a luxurious, crystal clear perfume bottle resting on a pristine, minimalist white marble pedestal. The lighting is soft and dramatic, creating elegant caustics and refractions through the glass. The background is a soft, out-of-focus Gallery White (#F9F9F7) environment, emphasizing a 'Quiet Luxury' aesthetic. The composition is spacious and atmospheric, perfect for a high-end brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAE_0L5cR0pkr2ru0HbYNaHDF1ZnRepwr9rp1afmhcl5IHwctCNhEAxvM_7C38Jx8548WXdvcDzNdJ4KAR6LcGfMfXDp56XpQEBFY_LNgA4FcN3LKQMQFvvV9y48g4YIdV7AIZgaOPs-nLKECgQaPEACVVlm962DiGShdydFy2mo7hYzkZz5gTlL8HU1WrmU12dP4JWl8nq3OdRV209QiWJHkfQTSaDhSy2iknX0OFsYQqrEeixwEFkqQ')"></div>
+<div class="absolute inset-0 bg-surface/30 backdrop-blur-[2px]"></div> <!-- Subtle overlay for text legibility -->
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-3xl flex flex-col items-center">
+<h1 class="font-display-lg text-display-lg text-primary mb-8 tracking-tight">Descubre Tu Esencia</h1>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md uppercase py-4 px-8 sharp-corners hover:bg-primary-container/90 transition-colors duration-300 border border-transparent">
+                Explorar Colección
+            </button>
+</div>
+</section>
+<!-- Combos Especiales Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col items-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-8">Combos Especiales</h2>
+<!-- Category Tabs -->
+<div class="flex space-x-8 border-b border-outline-variant w-full max-w-md justify-center">
+<button class="font-label-md text-label-md uppercase pb-2 text-primary border-b border-primary -mb-px">Árabe</button>
+<button class="font-label-md text-label-md uppercase pb-2 text-secondary hover:text-primary transition-colors">Nicho</button>
+<button class="font-label-md text-label-md uppercase pb-2 text-secondary hover:text-primary transition-colors">Diseñador</button>
+</div>
+</div>
+<!-- Combos Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Combo Card 1 -->
+<div class="group cursor-pointer">
+<div class="w-full aspect-square mb-6 overflow-hidden bg-surface-container-low sharp-corners border border-outline-variant">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A meticulously styled flat lay photography of three elegant, minimalist perfume decants (small glass vials) arranged perfectly on a pure white textured background. The vials have sophisticated black caps. The lighting is soft and diffused, casting subtle, elongated shadows that emphasize the premium, 'Quiet Luxury' aesthetic. The composition is highly editorial and spacious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArL1XTwJ5R27nnW1ZmCrFpPFahY4GhqXVPDSC6U_Bhwj62J2ap9RbhPpKXImCy4ED6RNdNzHRgyRM0VAVdC9wSN6HsPQKnJvdLeKUUWMz9bcMMZ9FrUDdqzcbVRsfasPUmubz2mjbS9v_Jqa7Fr-0VsszGJjxtSzugaBOXcPmXoeFytHkmB3u2qARimzzyoqNTqNPsTNIu2Xga-PQC8N5-M9qdBp1aWTPAJBjAPQhMYGp-PwZAL5B0wg"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-md text-[24px] text-primary mb-2">Trío Árabe</h3>
+<p class="font-price-display text-price-display text-secondary">L. 850</p>
+</div>
+</div>
+<!-- Combo Card 2 -->
+<div class="group cursor-pointer">
+<div class="w-full aspect-square mb-6 overflow-hidden bg-surface-container-low sharp-corners border border-outline-variant">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A striking editorial product shot featuring a collection of five premium perfume decants standing elegantly on an off-white, matte stone surface. The vials feature minimalist typographic labels. The scene is illuminated by gentle, warm natural light creating a serene and exclusive atmosphere. The minimalist, monochromatic setting perfectly captures the 'Quiet Luxury' brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAZhYuJhSzOOezYC2BGp-fSl4qxosFtYDz-g-_B-vN9k5jQUm6hUb17Z-puouLf_qx0ztFG1WaxC09c_I7gFCHSEaiPei8Fqq-RF8rTF85ZOS5YRJI4Oku5b_RUBP5sxXxsThlUoGiYw5FPD2hTN1Bwg2DG3g-alLz6s0Fj7B4oXAUbni1vNmydsPCBfDE4NrNUQWxOLKqPH-uv0JBw2ppnrT7ICTGtjxgNjcvYgMnzCMSY8CDIP5vGw"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-md text-[24px] text-primary mb-2">Colección Esencial</h3>
+<p class="font-price-display text-price-display text-secondary">L. 1,200</p>
+</div>
+</div>
+<!-- Combo Card 3 -->
+<div class="group cursor-pointer">
+<div class="w-full aspect-square mb-6 overflow-hidden bg-surface-container-low sharp-corners border border-outline-variant">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end, minimalist photograph of two exquisite perfume decants placed next to a single, delicate white flower on a Gallery White background. The composition is asymmetric and highly intentional, conveying a sense of exclusivity and craftsmanship. The lighting is pristine and bright, reflecting the sophisticated, editorial visual style of a luxury atelier." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcQ0vDmzafQPNo367JDA6JndeIytkE8E2eDny1Bmn4CARlHzCTDOTOuj6AKwZQDWmNq774IdxRAdKd9nO-KaN-gtW09QtqZQ4IZMDroevLW_RFAeHlKri2jhLXXMzqJtVCmvOq8tAg818XhrfXF6U0LTLhFhvcwTNzPjJkgZ3fI1uRRLYAeBqB41OZsdZY9Tmc5cSwLKigBt9awlshB8LLBBIhUfnYRHNFl-DALiIwf4UCnR0Us90l8A"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-md text-[24px] text-primary mb-2">Dúo Nocturno</h3>
+<p class="font-price-display text-price-display text-secondary">L. 600</p>
+</div>
+</div>
+</div>
+<div class="mt-16 flex justify-center">
+<button class="border border-primary-container text-primary-container font-label-md text-label-md uppercase py-3 px-8 sharp-corners hover:bg-primary-container hover:text-on-primary transition-colors duration-300">
+                Ver Todos Los Combos
+            </button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full rounded-none border-t border-outline-variant dark:border-outline">
+<div class="w-full px-margin-desktop py-section-gap flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto space-y-8 md:space-y-0">
+<!-- Brand Logo -->
+<div class="font-headline-sm text-[24px] font-medium text-primary dark:text-primary-fixed font-headline-lg">
+                Decanté HN
+            </div>
+<!-- Copyright -->
+<div class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim">
+                © 2024 Decanté HN. All rights reserved.
+            </div>
+<!-- Social Links -->
+<div class="flex space-x-6">
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Facebook</a>
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Instagram</a>
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Pinterest</a>
+</div>
+</div>
+</footer>
+</body></html>

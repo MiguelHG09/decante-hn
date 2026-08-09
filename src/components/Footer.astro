@@ -1,0 +1,49 @@
+---
+const numeroWhatsApp = "50498693529";
+const mensajeWA = "Hola, me gustaria hacer una consulta.";
+const linkWA = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeWA)}`;
+---
+
+<footer class="bg-surface-container-low border-t border-outline-variant w-full rounded-none mt-auto">
+    <div class="w-full px-margin-mobile md:px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto space-y-8 md:space-y-0">
+        
+        <!-- Brand Logo -->
+        <div class="font-serif text-[24px] font-medium text-primary">
+            Decanté HN
+        </div>
+        
+        <!-- Copyright -->
+        <div class="font-sans text-[14px] text-secondary">
+            © 2026 Decanté HN. All rights reserved.
+        </div>
+        
+        <!-- Social Links (Iconos alineados y con animación hover) -->
+        <div class="flex items-center space-x-6">
+            
+            <!-- Instagram -->
+            <a href="https://instagram.com/decante.hn" target="_blank" aria-label="Instagram" class="group block w-5 h-5 text-secondary hover:text-primary transition-colors duration-200">
+                <svg class="w-full h-full transition-transform duration-200 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@decante.hn" target="_blank" aria-label="TikTok" class="group block w-5 h-5 text-secondary hover:text-primary transition-colors duration-200">
+                <svg class="w-full h-full transition-transform duration-200 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                </svg>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href={linkWA} target="_blank" aria-label="WhatsApp" class="group block w-5 h-5 text-secondary hover:text-primary transition-colors duration-200">
+                <svg class="w-full h-full transition-transform duration-200 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+            </a>
+            
+        </div>
+
+    </div>
+</footer>

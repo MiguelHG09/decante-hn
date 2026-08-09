@@ -1,0 +1,199 @@
+---
+---
+<!-- Overlay oscuro que cubre la página -->
+<div id="cart-overlay" class="fixed inset-0 bg-[#1c1b1b]/40 backdrop-blur-sm z-50 transition-opacity hidden"></div>
+
+<!-- Panel del carrito (Con fondo HEX forzado para que no se oscurezca) -->
+<aside id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-[#fcf9f8] z-[60] flex flex-col shadow-2xl translate-x-full duration-300 ease-in-out border-l border-[#c2c9bc]">
+    
+    <div class="flex items-center justify-between p-6 border-b border-[#e5e2e1] bg-[#fcf9f8]">
+        <h2 class="font-serif text-[32px] text-[#001501] m-0">Tu Pedido</h2>
+        <button id="close-cart-btn" aria-label="Cerrar carrito" class="p-2 text-[#5d5f5d] hover:text-[#001501] transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-[28px]">close</span>
+        </button>
+    </div>
+
+    <!-- Lista de Items -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6" id="cart-items-container">
+        <p id="empty-message" class="font-sans text-center text-[#5d5f5d] mt-10 hidden">Tu carrito está vacío.</p>
+        <div id="cart-items-list" class="space-y-6"></div>
+    </div>
+
+    <!-- Envío y Totales -->
+    <div class="p-6 border-t border-[#e5e2e1] bg-[#fcf9f8] mt-auto">
+        <div class="pt-2 mb-6">
+            <h4 class="font-sans text-[14px] font-semibold text-[#001501] mb-4 uppercase tracking-[0.1em]">Zona de Envío</h4>
+            <div class="space-y-3" id="shipping-options">
+                <label class="shipping-label flex items-center p-3 border border-[#002d04] bg-white cursor-pointer transition-colors group">
+                    <input checked class="form-radio text-[#002d04] focus:ring-[#002d04] w-4 h-4 ml-1" name="shipping" type="radio" value="80" data-name="Tegucigalpa (1 Día)">
+                    <span class="ml-3 font-sans text-[14px] text-[#001501] flex-1 zone-name">Tegucigalpa (1 Día)</span>
+                    <span class="font-sans text-[14px] font-medium text-[#001501]">L. 80</span>
+                </label>
+                <label class="shipping-label flex items-center p-3 border border-[#c2c9bc] hover:border-[#002d04] bg-white cursor-pointer transition-colors group">
+                    <input class="form-radio text-[#002d04] focus:ring-[#002d04] w-4 h-4 ml-1" name="shipping" type="radio" value="95" data-name="Nivel Nacional (2-3 Días)">
+                    <span class="ml-3 font-sans text-[14px] text-[#5d5f5d] group-hover:text-[#001501] flex-1 transition-colors zone-name">Nivel Nacional (2-3 Días)</span>
+                    <span class="font-sans text-[14px] font-medium text-[#5d5f5d] group-hover:text-[#001501] transition-colors">L. 95</span>
+                </label>
+                <label class="shipping-label flex items-center p-3 border border-[#c2c9bc] hover:border-[#002d04] bg-white cursor-pointer transition-colors group">
+                    <input class="form-radio text-[#002d04] focus:ring-[#002d04] w-4 h-4 ml-1" name="shipping" type="radio" value="250" data-name="Roatán y Pto. Lempira">
+                    <span class="ml-3 font-sans text-[14px] text-[#5d5f5d] group-hover:text-[#001501] flex-1 transition-colors zone-name">Roatán y Pto. Lempira</span>
+                    <span class="font-sans text-[14px] font-medium text-[#5d5f5d] group-hover:text-[#001501] transition-colors">L. 250</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="space-y-3 mb-6">
+            <div class="flex justify-between items-center text-[#5d5f5d] font-sans text-[15px]">
+                <span>Subtotal</span><span id="ui-subtotal" class="font-medium">L. 0</span>
+            </div>
+            <div class="flex justify-between items-center text-[#5d5f5d] font-sans text-[15px]">
+                <span>Envío</span><span id="ui-envio" class="font-medium">L. 80</span>
+            </div>
+            <div class="flex justify-between items-center pt-3 border-t border-[#e5e2e1]">
+                <span class="font-serif text-[20px] font-semibold text-[#001501]">Total Final</span>
+                <span id="ui-total" class="font-sans text-[24px] font-bold text-[#001501]">L. 80</span>
+            </div>
+        </div>
+        
+        <a id="wa-checkout-btn" href="#" target="_blank" class="w-full bg-[#002d04] text-white hover:bg-[#001501] transition-colors py-4 px-6 flex items-center justify-center font-sans font-medium text-[16px] uppercase tracking-wider">
+            Hacer Pedido por WhatsApp
+        </a>
+    </div>
+</aside>
+
+<script>
+    import { cartItems, shippingCost, shippingZone, updateItemQuantity, removeCartItem } from '../store/cartStore.js';
+
+    const cartBtn = document.getElementById('cart-btn');
+    const closeCartBtn = document.getElementById('close-cart-btn');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartOverlay = document.getElementById('cart-overlay');
+    
+    const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+    const shippingLabels = document.querySelectorAll('.shipping-label');
+    
+    const emptyMessage = document.getElementById('empty-message');
+    const cartItemsList = document.getElementById('cart-items-list');
+    const uiSubtotal = document.getElementById('ui-subtotal');
+    const uiEnvio = document.getElementById('ui-envio');
+    const uiTotal = document.getElementById('ui-total');
+    const waBtn = document.getElementById('wa-checkout-btn');
+
+    function toggleCart() {
+        cartSidebar.classList.toggle('translate-x-full');
+        cartSidebar.classList.toggle('translate-x-0');
+        cartOverlay.classList.toggle('hidden');
+    }
+    cartBtn?.addEventListener('click', toggleCart);
+    closeCartBtn?.addEventListener('click', toggleCart);
+    cartOverlay?.addEventListener('click', toggleCart);
+
+    shippingRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value);
+            const name = e.target.getAttribute('data-name');
+            shippingCost.set(val);
+            shippingZone.set(name);
+
+            shippingLabels.forEach(label => {
+                if (label.querySelector('input').checked) {
+                    label.className = "shipping-label flex items-center p-3 border border-[#002d04] bg-white cursor-pointer transition-colors group";
+                    label.querySelector('.zone-name').classList.replace('text-[#5d5f5d]', 'text-[#001501]');
+                } else {
+                    label.className = "shipping-label flex items-center p-3 border border-[#c2c9bc] hover:border-[#002d04] bg-white cursor-pointer transition-colors group";
+                    label.querySelector('.zone-name').classList.replace('text-[#001501]', 'text-[#5d5f5d]');
+                }
+            });
+        });
+    });
+
+    cartItems.subscribe(items => {
+        const itemsArray = Object.values(items);
+        
+        if (itemsArray.length === 0) {
+            emptyMessage.classList.remove('hidden');
+            cartItemsList.innerHTML = '';
+        } else {
+            emptyMessage.classList.add('hidden');
+            cartItemsList.innerHTML = itemsArray.map(item => `
+                <div class="flex gap-4 items-center border-b border-[#e5e2e1] pb-6">
+                    <div class="w-16 h-16 bg-white shrink-0 border border-[#e5e2e1] rounded-none relative overflow-hidden">
+                        <img src="${item.imagen}" alt="${item.nombre}" class="object-cover w-full h-full absolute inset-0">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between h-16">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-[16px] leading-tight text-[#001501]">${item.nombre}</h3>
+                                <p class="font-sans text-[#5d5f5d] text-[12px]">${item.tamaño}</p>
+                            </div>
+                            <button class="remove-btn text-[#c2c9bc] hover:text-red-700 transition-colors material-symbols-outlined text-[18px] cursor-pointer" data-id="${item.uniqueId}">delete</button>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <div class="flex items-center border border-[#e5e2e1] rounded-none h-6 bg-white">
+                                <button class="minus-btn w-6 h-full flex items-center justify-center text-[#5d5f5d] hover:text-[#001501] transition-colors cursor-pointer" data-id="${item.uniqueId}">-</button>
+                                <span class="w-6 h-full flex items-center justify-center font-sans text-[12px] text-[#001501]">${item.cantidad}</span>
+                                <button class="plus-btn w-6 h-full flex items-center justify-center text-[#5d5f5d] hover:text-[#001501] transition-colors cursor-pointer" data-id="${item.uniqueId}">+</button>
+                            </div>
+                            <span class="font-sans font-medium text-[#001501] text-[14px]">L. ${item.precio * item.cantidad}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.minus-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    updateItemQuantity(id, cartItems.get()[id].cantidad - 1);
+                });
+            });
+            document.querySelectorAll('.plus-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    updateItemQuantity(id, cartItems.get()[id].cantidad + 1);
+                });
+            });
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    removeCartItem(e.currentTarget.dataset.id);
+                });
+            });
+        }
+        
+        updateTotals();
+        
+        // Actualizar el numerito del carrito en el navbar
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+            badge.innerText = itemsArray.length;
+            badge.classList.toggle('hidden', itemsArray.length === 0);
+        }
+    });
+
+    shippingCost.subscribe(() => updateTotals());
+
+    function updateTotals() {
+        const items = Object.values(cartItems.get());
+        const currentShipping = shippingCost.get();
+        const subtotal = items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        const envioFinal = items.length > 0 ? currentShipping : 0; 
+        const totalFinal = subtotal + envioFinal;
+
+        uiSubtotal.innerText = `L. ${subtotal}`;
+        uiEnvio.innerText = `L. ${envioFinal}`;
+        uiTotal.innerText = `L. ${totalFinal}`;
+
+        if (items.length === 0) {
+            waBtn.href = "#";
+            waBtn.onclick = (e) => { e.preventDefault(); alert("Tu carrito está vacío."); };
+        } else {
+            const numero = "50498693529";
+            let texto = "¡Buen día! Quisiera hacer el siguiente pedido:\n\n";
+            items.forEach(item => {
+                texto += `- ${item.cantidad}x ${item.nombre} (${item.tamaño}) - L. ${item.precio * item.cantidad}\n`;
+            });
+            texto += `\n*Subtotal:* L. ${subtotal}\n*Envío (${shippingZone.get()}):* L. ${envioFinal}\n*TOTAL FINAL: L. ${totalFinal}*\n`;
+            waBtn.href = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+            waBtn.onclick = null;
+        }
+    }
+</script>

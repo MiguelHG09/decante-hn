@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Decanté HN - Catálogo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container": "#f0eded",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed-variant": "#454746",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed-dim": "#a2d398",
+                        "on-tertiary-fixed-variant": "#464744",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#e2e3e1",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "on-primary-container": "#6a9862",
+                        "on-surface-variant": "#42493f",
+                        "tertiary-fixed": "#e3e3de",
+                        "outline": "#72796e",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#255022",
+                        "outline-variant": "#c2c9bc",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "on-primary-fixed": "#002202",
+                        "on-primary": "#ffffff",
+                        "secondary": "#5d5f5d",
+                        "primary-fixed": "#bdf0b2",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-container": "#8c8d89",
+                        "primary": "#001501",
+                        "tertiary": "#0f110e",
+                        "on-secondary-container": "#636563",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-error": "#ffffff",
+                        "primary-container": "#002d04",
+                        "surface-dim": "#dcd9d9",
+                        "on-background": "#1c1b1b",
+                        "tertiary-container": "#242623",
+                        "secondary-fixed": "#e2e3e1",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface": "#1c1b1b",
+                        "inverse-primary": "#a2d398",
+                        "surface-tint": "#3d6838"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "price-display": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "price-display": ["20px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F9F9F7; } /* Enforcement of Gallery White */
+        .glass-blur { backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface w-full top-0 sticky border-b border-outline-variant dark:border-outline flat no shadows z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md text-primary dark:text-primary-fixed uppercase tracking-wider" href="#">
+                Decanté HN
+            </a>
+<!-- Navigation Links (Web) -->
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:opacity-70 font-label-md text-label-md uppercase" href="#">Inicio</a>
+<!-- Active State applied to Catálogo -->
+<a class="text-primary dark:text-primary-fixed border-b border-primary dark:border-primary-fixed pb-1 font-bold hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:opacity-70 font-label-md text-label-md uppercase" href="#">Catálogo</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:opacity-70 font-label-md text-label-md uppercase" href="#">Información</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:opacity-70 font-label-md text-label-md uppercase" href="#">Contáctanos</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed cursor-pointer transition-opacity duration-200 active:opacity-70">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-desktop md:px-margin-desktop px-margin-mobile py-24">
+<!-- Header -->
+<header class="mb-16 text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">Colección Completa</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">Explora nuestra cuidada selección de fragancias nicho y de diseñador. Descubre el arte de la perfumería fina, decantada con precisión y cuidado.</p>
+</header>
+<!-- Filters Section -->
+<section class="flex flex-col md:flex-row gap-4 mb-section-gap border-b border-surface-container-highest pb-8">
+<div class="relative w-full md:w-64">
+<select class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
+<option disabled="" selected="" value="">Categoría</option>
+<option value="nicho">Nicho</option>
+<option value="disenador">Diseñador</option>
+<option value="indie">Indie</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+<div class="relative w-full md:w-64">
+<select class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
+<option disabled="" selected="" value="">Marca</option>
+<option value="tom-ford">Tom Ford</option>
+<option value="creed">Creed</option>
+<option value="mfk">Maison Francis Kurkdjian</option>
+<option value="le-labo">Le Labo</option>
+<option value="byredo">Byredo</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+<div class="relative w-full md:w-64">
+<select class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
+<option disabled="" selected="" value="">Precio</option>
+<option value="asc">Menor a Mayor</option>
+<option value="desc">Mayor a Menor</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Product Card 1 -->
+<article class="group cursor-pointer flex flex-col">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, high-end product photography shot of a sleek, dark amber glass perfume bottle (Tom Ford Oud Wood style) standing on a perfectly smooth, off-white marble surface. The lighting is soft and studio-quality, casting subtle, elegant shadows. The background is a stark, clean, light-mode gallery aesthetic with vast negative space, emphasizing luxury and precision. The mood is sophisticated and quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEWRdsf09JiBQyOVxm1usDBk8fw3lJ6sN3hv0QFAJ1mlij2KOk4F9FgkMC18sPmsQOPFNv7ltaJJD0Nb0fjLdlPjyNL0iKKLKRPKeRknafMsInizMTSI-3JnzDyj4nC0BCSedgMNYt0xh5h54kqkgNVaqCesPnZM6gtC2968QBlI_izw317PuTGjAcmR1sAAFTycFNm648vrK9Yo1XQRwHVuopRkXgbVw6ziYoAy6noTk5shA6Fm8jAA"/>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">TOM FORD</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Oud Wood</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-primary">Desde L. 450</span>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="group cursor-pointer flex flex-col">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious, minimalist product shot of a clear, elegant perfume bottle (Creed Aventus style) with a silver cap, placed on a pristine white pedestal. Studio lighting creates crisp highlights on the glass and a soft gradient background in light off-white tones. The composition is highly symmetrical and editorial, conveying exclusivity, craftsmanship, and a quiet luxury aesthetic within a bright, modern environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiqF_Y5YdSFs55Wo9Axh8ShW4Agv482DcfF0U-kEvSqXEfKm7lgtTcgN6H7xRVJO1iXD9FIGlb1abVy21Kmlctig46CeauSz72lCtxCZ5hG5TrPMsymtqG2vrq__3b2AMzelrl3FMl2cqMUgmadVVR7zqdjaDYQWpl5CDGOypGJ4iqa-HysTlRKfItPZMxBqH_Nyh-sf1gIEbqgdiTC1DHnKf5-D7MyRbQEDQamoHdAxOtsJ92uPIIcw"/>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">CREED</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Aventus</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-primary">Desde L. 650</span>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="group cursor-pointer flex flex-col">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A pristine, editorial product photograph of a square, golden-hued perfume bottle (Maison Francis Kurkdjian Baccarat Rouge 540 style) resting on a flawless, matte white surface. The lighting is bright and ethereal, producing soft, glowing reflections. The surrounding space is vast, minimalist, and styled in a high-key light mode aesthetic. The mood is sophisticated, premium, and meticulously balanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKc0j-OCbEtkrj146XpG7ukiiQqswywtT-fezEkC5rqVCZJFq8g_Ab1feuEsxdY-tAbK2Da2M9UKhnE5174XXOu-wAxpiFwvPOvnaFrOp3UV-N6PmEFxy5RtcZnB0wfADOVcBHnvh0L2Dmg6qNkJMpAXbvV7cucG4NB_0bYFLy_pFhW9xMi09uIuDozbLWn_aSfCgKXzb7AWwhuSvIwauyfEn7F5dNhvJPD6bmhwhEA0Ab8VT3heJeqw"/>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">MAISON FRANCIS KURKDJIAN</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Baccarat Rouge 540</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-primary">Desde L. 800</span>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="group cursor-pointer flex flex-col">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, apothecary-style perfume bottle (Le Labo Santal 33 style) with a simple white text label, placed against a stark white backdrop. The lighting is natural and diffuse, highlighting the clear liquid inside. The composition is stripped down to its essentials, reflecting a quiet luxury and utilitarian elegance. The image sits within a bright, airy, light-mode gallery context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeYlXfUSJJZ0QR06ZyXMrvyBfXVqy1sKPHYS6QyrgnWU7PPUP252vmAt2GqRDaRiNBXU-CBA3igHgJ_XPH5eHiuGiw1tILukg34XcYrONdetM87gGhpAcTzGiC8H4A4z5z2JdpMEi-0dp2LDtWMurCgRHbTfnTHKC-mY_Ow6D0St9UKSOTAk67zTzYPzf6IJkPTP2o_5JwkQ9tv3xeFDTArAzUkRq_d9zn9Knhkk0OlgwXdU8OfLwAaA"/>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">LE LABO</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Santal 33</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-primary">Desde L. 550</span>
+</div>
+</article>
+<!-- Product Card 5 -->
+<article class="group cursor-pointer flex flex-col">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A sleek, cylindrical perfume bottle with a minimalist black magnetic cap (Byredo Gypsy Water style) centered on a plain white, high-key background. Soft, diffused lighting minimizes harsh shadows, creating a serene, clean aesthetic. The visual focus is entirely on the form and typography of the bottle, embodying minimalist editorial design, premium materiality, and quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Vx7BzyfbosWbCyNpWPfPcC8sOpja-PP-Lk4zRoPB6gyTl21YP8C_OjSq0EIZclvh5rcy991EsN1Vs34lnHpksu-FXbsGo_KMShF5YOqdpKzVHDuO-iHZZXtmeQ5YIp_PUCGXQG6xKRzMiuKgvuL33l_-qXEwm56kCf88SX45kXboRFZ6hS4lHtp1YSXHyapSQ_S74iVXJaMarq5yX-4dRQg9eOoELGEyMtjNIHmVduSE3KM4N_Myuw"/>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">BYREDO</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Gypsy Water</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-primary">Desde L. 500</span>
+</div>
+</article>
+<!-- Product Card 6 (Out of Stock) -->
+<article class="flex flex-col opacity-60 pointer-events-none">
+<div class="w-full aspect-square bg-surface-bright relative overflow-hidden mb-6 flex items-center justify-center border border-surface-container-highest rounded-none">
+<img class="object-cover w-full h-full grayscale" data-alt="A grayscale, desaturated product shot of a high-end perfume bottle (Parfums de Marly Layton style) against a flat white background. The image is intentionally muted to signify unavailability while maintaining an elegant, minimalist gallery aesthetic. Soft studio lighting provides a clean silhouette without harsh contrasts, fitting perfectly into a light-mode, quiet luxury design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSsFXi0Ye-LV02ssj5t69aVOBTPg5YZnKjSNxUKCuJoT_rAkGIZgpN-ianqlM_7g4SMc74Lhz8_q6GkZRsnUr19UNzYsJ8nMIWPF6uJTSCzQK-L2zhGta0e3S7uMeBg7bErMfLGOR7TRgJZcvC5qQzqJ6va9zwmO8QEjJGqeBjnQ9j8vt8l9GLTTp4O0zfBls-qddUeCHL8afzMF7ZkqHdsBU_l1_wQLMWAZSEZZ9i-Qg86BPYXHzH7w"/>
+<!-- Agotado Badge -->
+<div class="absolute inset-0 flex items-center justify-center bg-surface/30 glass-blur">
+<span class="bg-primary-container text-on-primary rounded-none px-6 py-2 font-label-md text-label-md tracking-widest">AGOTADO</span>
+</div>
+</div>
+<div class="flex flex-col text-center px-4">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">PARFUMS DE MARLY</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 truncate">Layton</h3>
+<hr class="border-surface-container-highest mb-4 w-12 mx-auto"/>
+<span class="font-price-display text-price-display text-secondary">Agotado</span>
+</div>
+</article>
+</section>
+<!-- Pagination (Implicit for a complete catalog) -->
+<div class="flex justify-center items-center gap-4 mt-16 mb-8">
+<button class="text-secondary hover:text-primary transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="font-label-md text-label-md text-primary border-b border-primary pb-1 px-2">1</span>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors px-2" href="#">2</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors px-2" href="#">3</a>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full rounded-none border-t border-outline-variant dark:border-outline flat no shadows mt-auto">
+<div class="w-full px-margin-desktop py-section-gap flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-8 md:gap-0">
+<!-- Brand / Copyright -->
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed uppercase tracking-wider font-headline-md">Decanté HN</span>
+<p class="font-body-md text-body-md text-secondary">© 2024 Decanté HN. All rights reserved.</p>
+</div>
+<!-- Social Links -->
+<div class="flex gap-8">
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Facebook</a>
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Instagram</a>
+<a class="text-on-secondary-fixed-variant dark:text-on-secondary-fixed font-label-md text-label-md hover:underline decoration-1 underline-offset-4 transition-all duration-200" href="#">Pinterest</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,25 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import CartSidebar from '../components/CartSidebar.astro';
+import Footer from '../components/Footer.astro'; // <-- IMPORTA AQUÍ
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} | Decanté HN</title>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary selection:text-on-primary flex flex-col min-h-screen">
+    <Navbar />
+    <CartSidebar />
+    
+    <main class="flex-grow"> <!-- flex-grow empuja el footer hacia abajo -->
+        <slot />
+    </main>
+
+    <Footer /> <!-- <-- COLÓCALO AQUÍ -->
+</body>
+</html>

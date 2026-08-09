@@ -1,0 +1,242 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Decanté HN - Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#6a9862",
+                        "on-tertiary-fixed-variant": "#464744",
+                        "on-primary-fixed": "#002202",
+                        "primary-fixed": "#bdf0b2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#a2d398",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "background": "#fcf9f8",
+                        "on-primary-fixed-variant": "#255022",
+                        "inverse-surface": "#313030",
+                        "surface": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "secondary": "#5d5f5d",
+                        "primary-container": "#002d04",
+                        "secondary-container": "#e2e3e1",
+                        "on-surface-variant": "#42493f",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-container": "#242623",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "secondary-fixed": "#e2e3e1",
+                        "surface-tint": "#3d6838",
+                        "on-tertiary-container": "#8c8d89",
+                        "tertiary-fixed": "#e3e3de",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "tertiary": "#0f110e",
+                        "outline": "#72796e",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#454746",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#a2d398",
+                        "outline-variant": "#c2c9bc",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-container": "#636563",
+                        "primary": "#001501",
+                        "surface-container": "#f0eded",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "label-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-md": ["Montserrat"],
+                        "price-display": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "price-display": ["20px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fcf9f8; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="antialiased text-on-surface bg-surface min-h-screen relative overflow-hidden">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky bg-surface/80 backdrop-blur-md dark:bg-surface-dim/80 border-b border-outline-variant/30 shadow-sm z-40">
+<div class="flex justify-between items-center w-full px-gutter h-[72px] max-w-container-max mx-auto">
+<!-- Brand -->
+<div class="font-display-lg text-display-lg text-on-surface dark:text-on-surface tracking-tight" style="font-size: 24px; font-weight: 700;">
+                Decanté HN
+            </div>
+<!-- Navigation -->
+<nav class="hidden md:flex items-center space-x-12">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/70 hover:text-primary transition-colors uppercase tracking-[0.1em]" href="#">Inicio</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary uppercase tracking-[0.1em] pb-1" href="#">Catálogo</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/70 hover:text-primary transition-colors uppercase tracking-[0.1em]" href="#">Información</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/70 hover:text-primary transition-colors uppercase tracking-[0.1em]" href="#">Contáctanos</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center">
+<button aria-label="Cart" class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-label-md">2</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Blurred) -->
+<main class="w-full max-w-container-max mx-auto px-margin-desktop py-section-gap flex flex-col items-center">
+<!-- Abstracted content to focus on the cart state -->
+<div class="w-full h-96 bg-surface-container-low border border-outline-variant/30 flex items-center justify-center rounded-none shadow-sm mb-12 relative overflow-hidden group">
+
+<h1 class="font-headline-lg text-headline-lg text-on-surface relative z-10 bg-surface/50 p-4 backdrop-blur-sm">Descubre Tu Esencia</h1>
+</div>
+<div class="grid grid-cols-3 gap-gutter w-full">
+<div class="h-64 bg-surface-container border border-outline-variant/30 rounded-none"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/30 rounded-none"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/30 rounded-none"></div>
+</div>
+</main>
+<!-- Overlay -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 transition-opacity"></div>
+<!-- SideNavBar (Slide-over Cart) -->
+<aside class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-surface dark:bg-surface-dim z-[60] flex flex-col border-l border-outline-variant/20 shadow-[0px_4px_20px_rgba(15,23,42,0.05)] translate-x-0 duration-300 ease-in-out">
+<!-- Cart Header -->
+<div class="flex items-center justify-between p-6 border-b border-outline-variant/30 bg-surface">
+<h2 class="font-headline-md text-headline-md text-on-surface m-0">Tu Pedido</h2>
+<button aria-label="Close cart" class="p-2 text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[28px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Cart Items (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Item 1 -->
+<div class="flex gap-4 items-center border-b border-outline-variant/20 pb-6">
+<div class="w-20 h-20 bg-surface-container shrink-0 border border-outline-variant/10 rounded-none relative overflow-hidden">
+<img class="object-cover w-full h-full absolute inset-0" data-alt="A close-up shot of a sleek, minimalist 5ml glass decant spray bottle filled with a golden amber liquid. The bottle sits against a stark, pure white background with soft, studio-quality lighting highlighting its elegant cylindrical shape and matte silver cap." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL2eO9CJRjzPay8BRtXvZF0absCA0SItSXBDz1lGSpBBPlu-sNT--oKffOO58FbADT0iuV0aEJg_SIU-oSpCgUm_-jmsAbp0M40wh_14ZfmxZDJguXk5dYBRAHoK1iY3NJ_vRkGSTQCw7lGc42g7D76s6Y28s3ep5W6TD0TZ414fiIblrTsMml9qsgv-ieJzN1zxKiMhklxKMJkxRpcbznsfZpVTBuobu2-xPUUrlKu2Jj2mzwOJrbVQ">
+</div>
+<div class="flex-1 flex flex-col justify-between h-20">
+<div>
+<h3 class="font-headline-md text-[18px] leading-tight text-on-surface mb-1">Aventus Creed</h3>
+<p class="font-body-md text-on-surface-variant text-[14px]">Decant 5ml</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center border border-outline-variant rounded-none">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="w-8 h-8 flex items-center justify-center font-body-md text-[14px]">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<span class="font-price-display text-price-display text-on-surface text-[16px]">L. 450</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 items-center border-b border-outline-variant/20 pb-6">
+<div class="w-20 h-20 bg-surface-container shrink-0 border border-outline-variant/10 rounded-none relative overflow-hidden">
+<img class="object-cover w-full h-full absolute inset-0" data-alt="A stylish, small rectangular perfume decant bottle containing a pale, crystalline fragrance. It rests on a subtle grey marble surface under diffused, sophisticated lighting that emphasizes the clarity and purity of the liquid. The aesthetic is clean, premium, and refined." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAom10LuiccJCECh5JcLmbtiU-s64OrTk2PZ8ffzDHzKfUaxG6t632n7axzX8lKhRY_EMCT98gD643k1VYQRdl2XZZjtihc5pbP4DFlftGFMJDYGQ-9_deWcjMGcY7xhjpnamhrKcfBLgpgfftBDxxGxcB9SaugQfywoNSoqHeTPMBwgJwosVOhpOM8aewU-71AP2y5LRbNbfzjPmd-QJ_CAW3-5QsL1BfNboKIAkK7Essk6CbLcKUiyg">
+</div>
+<div class="flex-1 flex flex-col justify-between h-20">
+<div>
+<h3 class="font-headline-md text-[18px] leading-tight text-on-surface mb-1">Baccarat Rouge 540</h3>
+<p class="font-body-md text-on-surface-variant text-[14px]">Decant 5ml</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center border border-outline-variant rounded-none">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="w-8 h-8 flex items-center justify-center font-body-md text-[14px]">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<span class="font-price-display text-price-display text-on-surface text-[16px]">L. 450</span>
+</div>
+</div>
+</div>
+<!-- Shipping Zone -->
+<div class="pt-2">
+<h4 class="font-label-md text-label-md text-on-surface mb-4 uppercase tracking-[0.1em]">Zona de Envío</h4>
+<div class="space-y-3">
+<label class="flex items-center p-3 border border-primary bg-surface-container-low rounded-none cursor-pointer transition-colors group">
+<input checked="" class="form-radio text-primary border-primary focus:ring-primary focus:ring-offset-surface w-4 h-4 ml-1" name="shipping" type="radio">
+<span class="ml-3 font-body-md text-[14px] text-on-surface flex-1">Tegucigalpa (1 Día)</span>
+<span class="font-price-display text-[14px] text-on-surface font-medium">L. 80</span>
+</label>
+<label class="flex items-center p-3 border border-outline-variant/50 hover:border-outline-variant rounded-none cursor-pointer transition-colors group">
+<input class="form-radio text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface w-4 h-4 ml-1" name="shipping" type="radio">
+<span class="ml-3 font-body-md text-[14px] text-on-surface-variant group-hover:text-on-surface flex-1 transition-colors">Nivel Nacional (2-3 Días)</span>
+<span class="font-price-display text-[14px] text-on-surface-variant group-hover:text-on-surface font-medium transition-colors">L. 95</span>
+</label>
+<label class="flex items-center p-3 border border-outline-variant/50 hover:border-outline-variant rounded-none cursor-pointer transition-colors group">
+<input class="form-radio text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface w-4 h-4 ml-1" name="shipping" type="radio">
+<span class="ml-3 font-body-md text-[14px] text-on-surface-variant group-hover:text-on-surface flex-1 transition-colors">Roatán y Pto. Lempira</span>
+<span class="font-price-display text-[14px] text-on-surface-variant group-hover:text-on-surface font-medium transition-colors">L. 250</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Cart Footer -->
+<div class="p-6 border-t border-outline-variant/30 bg-surface mt-auto">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center text-on-surface-variant font-body-md text-[15px]">
+<span class="">Subtotal</span>
+<span class="font-price-display">L. 900</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md text-[15px]">
+<span class="">Envío</span>
+<span class="font-price-display">L. 80</span>
+</div>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant/20">
+<span class="font-headline-md text-[20px] text-on-surface font-semibold">Total Final</span>
+<span class="font-price-display text-[24px] text-on-surface font-bold">L. 980</span>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary hover:bg-primary transition-colors py-4 px-6 flex items-center justify-center rounded-none shadow-none font-body-md font-medium text-[16px]">
+                Hacer Pedido por WhatsApp
+                <span class="material-symbols-outlined ml-2 text-[20px]" data-icon="send">send</span>
+</button>
+</div>
+</aside>
+
+
+</body></html>

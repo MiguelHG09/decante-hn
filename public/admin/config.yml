@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: MiguelHG09/decante-hn # Tu usuario y el nombre de tu repositorio
+  branch: main
+
+media_folder: "public/images" # Donde se guardarán las fotos que él suba
+public_folder: "/images" # La ruta web de las fotos
+
+collections:
+  # 1. ADMIN DE PRODUCTOS
+  - name: "productos"
+    label: "Catálogo de Perfumes"
+    folder: "src/data"
+    extension: "json"
+    format: "json"
+    identifier_field: "id"
+    fields:
+      - { label: "ID Único (Ej: mfk-baccarat)", name: "id", widget: "string" }
+      - { label: "Nombre del Perfume", name: "nombre", widget: "string" }
+      - { label: "Marca", name: "marca", widget: "string" }
+      - { label: "Categoría", name: "categoria", widget: "select", options: ["Nicho", "Diseñador", "Árabe", "Indie"] }
+      - { label: "Precio Base (L.)", name: "precio_base", widget: "number" }
+      - { label: "Imagen", name: "imagen", widget: "image" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Notas Olfativas", name: "notas_olfativas", widget: "list" }
+      - label: "Variantes / Tamaños"
+        name: "variantes"
+        widget: "list"
+        fields:
+          - { label: "Tamaño (Ej: Decant 5ml)", name: "tamaño", widget: "string" }
+          - { label: "Precio (L.)", name: "precio", widget: "number" }
+          - { label: "¿Está en stock?", name: "en_stock", widget: "boolean", default: true }
+
+  # 2. ADMIN DE COMBOS (¡Tu idea relacional en acción!)
+  - name: "combos"
+    label: "Combos Especiales"
+    folder: "src/data"
+    extension: "json"
+    format: "json"
+    identifier_field: "id"
+    fields:
+      - { label: "ID Único del Combo", name: "id", widget: "string" }
+      - { label: "Nombre del Combo", name: "nombre", widget: "string" }
+      - { label: "Descripción Breve", name: "descripcion", widget: "string" }
+      - { label: "Precio Total (L.)", name: "precio_total", widget: "number" }
+      - { label: "Imagen del Combo", name: "imagen", widget: "image" }
+      - label: "Perfumes Incluidos"
+        name: "productos_incluidos"
+        widget: "list"
+        fields:
+          # Aquí el CMS buscará el nombre del perfume en el JSON de productos, pero guardará su ID.
+          - { label: "Perfume", name: "id", widget: "relation", collection: "productos", search_fields: ["nombre", "marca"], value_field: "id", display_fields: ["marca", "nombre"] }
+          - { label: "Tamaño a incluir (Ej: Decant 5ml)", name: "tamaño_incluido", widget: "string" }
