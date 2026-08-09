@@ -1,9 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import combos from '../data/combos.json';
-import productos from '../data/productos.json';
+import ProductCard from '../components/ProductCard.astro';
 
-// Lógica relacional: Unir los combos con los datos reales del catálogo
+const combosGlob = import.meta.glob('../data/combos/*.json', { eager: true });
+const combos = Object.values(combosGlob).map(file => file.default);
+
+const productosGlob = import.meta.glob('../data/productos/*.json', { eager: true });
+const productos = Object.values(productosGlob).map(file => file.default);
+
 const combosMapeados = combos.map(combo => {
     const itemsCompletos = combo.productos_incluidos.map(itemRel => {
         const prodData = productos.find(p => p.id === itemRel.id);

@@ -1,18 +1,8 @@
-backend:
-  name: github
-  repo: MiguelHG09/decante-hn
-  branch: main
-  base_url: "https://decante-hn.pages.dev"
-
-media_folder: "public/images" # Donde se guardan las fotos que él suba
-public_folder: "/images" # La ruta web de las fotos
-
 collections:
-  # 1. ADMIN DE PRODUCTOS
   - name: "productos"
     label: "Catálogo de Perfumes"
-    folder: "src/data"
-    create: true 
+    folder: "src/data/productos" # <-- Nueva ruta
+    create: true
     extension: "json"
     format: "json"
     identifier_field: "id"
@@ -24,7 +14,8 @@ collections:
       - { label: "Precio Base (L.)", name: "precio_base", widget: "number" }
       - { label: "Imagen", name: "imagen", widget: "image" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
-      - { label: "Notas Olfativas", name: "notas_olfativas", widget: "list" }
+      # FIX DE LAS NOTAS OLFATIVAS:
+      - { label: "Notas Olfativas (Separadas por coma)", name: "notas_olfativas", widget: "string", hint: "Ej: Vainilla, Cítrico, Madera" }
       - label: "Variantes / Tamaños"
         name: "variantes"
         widget: "list"
@@ -33,11 +24,10 @@ collections:
           - { label: "Precio (L.)", name: "precio", widget: "number" }
           - { label: "¿Está en stock?", name: "en_stock", widget: "boolean", default: true }
 
-  # 2. ADMIN DE COMBOS (¡Tu idea relacional en acción!)
   - name: "combos"
     label: "Combos Especiales"
-    folder: "src/data"
-    create: true 
+    folder: "src/data/combos" # <-- Nueva ruta
+    create: true
     extension: "json"
     format: "json"
     identifier_field: "id"
@@ -51,6 +41,5 @@ collections:
         name: "productos_incluidos"
         widget: "list"
         fields:
-          # Aquí el CMS buscará el nombre del perfume en el JSON de productos, pero guardará su ID.
           - { label: "Perfume", name: "id", widget: "relation", collection: "productos", search_fields: ["nombre", "marca"], value_field: "id", display_fields: ["marca", "nombre"] }
-          - { label: "Tamaño a incluir (Ej: Decant 5ml)", name: "tamaño_incluido", widget: "string" }
+          - { label: "Tamaño a incluir", name: "tamaño_incluido", widget: "string" }

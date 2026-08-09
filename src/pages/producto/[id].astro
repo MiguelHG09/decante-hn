@@ -1,17 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import productos from '../../data/productos.json';
 
 export function getStaticPaths() {
+  const productosGlob = import.meta.glob('../../data/productos/*.json', { eager: true });
+  const productos = Object.values(productosGlob).map(file => file.default);
+
   return productos.map((producto) => ({
     params: { id: producto.id },
-    props: { producto },
+    props: { producto, todosLosProductos: productos },
   }));
 }
 
-const { producto } = Astro.props;
-const relacionados = productos.filter(p => p.id !== producto.id).slice(0, 4);
+const { producto, todosLosProductos } = Astro.props;
+const relacionados = todosLosProductos.filter(p => p.id !== producto.id).slice(0, 4);
+
+// Convertimos el texto "Vainilla, Lavanda" del CMS en etiquetas separadas
+const notasOlfativasArray = typeof producto.notas_olfativas === 'string' 
+    ? producto.notas_olfativas.split(',').map(n => n.trim()) 
+    : (producto.notas_olfativas || []);
 ---
 
 <Layout title={producto.nombre}>
@@ -29,9 +36,9 @@ const relacionados = productos.filter(p => p.id !== producto.id).slice(0, 4);
                 <h1 class="font-headline-lg text-headline-lg text-primary mb-6">{producto.nombre}</h1>
                 
                 <!-- RENDERIZADO DE NOTAS OLFATIVAS -->
-                {producto.notas_olfativas && producto.notas_olfativas.length > 0 && (
+                {notasOlfativasArray.length > 0 && (
                     <div class="flex flex-wrap gap-2 mb-8">
-                        {producto.notas_olfativas.map(nota => (
+                        {notasOlfativasArray.map(nota => (
                             <span class="px-4 py-1 border border-outline-variant text-secondary font-label-md text-[12px] uppercase tracking-widest bg-surface-bright">
                                 {nota}
                             </span>

@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import productos from '../data/productos.json';
 
-// Extraemos marcas y categorías únicas para llenar los dropdowns automáticamente
+// Magia: Astro lee todos los JSON individuales creados por el CMS
+const productosGlob = import.meta.glob('../data/productos/*.json', { eager: true });
+const productos = Object.values(productosGlob).map(file => file.default);
+
 const marcasUnicas = [...new Set(productos.map(p => p.marca))];
 const categoriasUnicas = [...new Set(productos.map(p => p.categoria))];
 ---
