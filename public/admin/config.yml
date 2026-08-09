@@ -1,7 +1,16 @@
+backend:
+  name: github
+  repo: MiguelHG09/decante-hn
+  branch: main
+  base_url: "https://decante-hn.pages.dev"
+     
+media_folder: "public/images"
+public_folder: "/images"
+
 collections:
   - name: "productos"
     label: "Catálogo de Perfumes"
-    folder: "src/data/productos" # <-- Nueva ruta
+    folder: "src/data/productos"
     create: true
     extension: "json"
     format: "json"
@@ -14,7 +23,6 @@ collections:
       - { label: "Precio Base (L.)", name: "precio_base", widget: "number" }
       - { label: "Imagen", name: "imagen", widget: "image" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
-      # FIX DE LAS NOTAS OLFATIVAS:
       - { label: "Notas Olfativas (Separadas por coma)", name: "notas_olfativas", widget: "string", hint: "Ej: Vainilla, Cítrico, Madera" }
       - label: "Variantes / Tamaños"
         name: "variantes"
@@ -26,7 +34,7 @@ collections:
 
   - name: "combos"
     label: "Combos Especiales"
-    folder: "src/data/combos" # <-- Nueva ruta
+    folder: "src/data/combos"
     create: true
     extension: "json"
     format: "json"
