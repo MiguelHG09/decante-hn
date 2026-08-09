@@ -51,21 +51,24 @@ const notasOlfativasArray = typeof producto.notas_olfativas === 'string'
                 </p>
                 
                 <!-- Variantes -->
-                <div class="mb-8">
-                    <span class="font-label-md text-label-md text-primary uppercase block mb-4">Tamaño</span>
-                    <div class="flex flex-wrap gap-4" id="variant-selector">
-                        {producto.variantes.map((variante, index) => (
-                            <button 
-                                class={`variant-btn px-6 py-3 font-label-md text-label-md uppercase tracking-wider border transition-colors ${index === 0 && variante.en_stock ? 'bg-primary text-on-primary border-primary active-variant' : 'border-outline-variant text-secondary hover:border-primary hover:text-primary'} ${!variante.en_stock ? 'opacity-50 cursor-not-allowed line-through' : 'cursor-pointer'}`}
-                                data-tamaño={variante.tamaño}
-                                data-precio={variante.precio}
-                                disabled={!variante.en_stock}
-                            >
-                                {variante.tamaño}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+<div class="mb-8">
+    <span class="font-sans text-[12px] font-semibold text-primary uppercase tracking-[0.1em] block mb-4">Tamaño</span>
+    <div class="flex flex-wrap gap-4" id="variant-container">
+        {producto.variantes && producto.variantes.map((variante, index) => (
+            <button 
+                class={`variant-btn px-6 py-3 border font-sans text-[12px] font-semibold uppercase tracking-widest transition-all duration-300 cursor-pointer ${
+                    index === 0 
+                    ? 'bg-primary border-primary text-white' 
+                    : 'bg-transparent border-outline-variant text-secondary hover:bg-primary hover:border-primary hover:text-white'
+                }`}
+                data-precio={variante.precio}
+                data-tamaño={variante.tamaño}
+            >
+                {variante.tamaño}
+            </button>
+        ))}
+    </div>
+</div>
                 
                 <!-- Acciones -->
                 <div class="flex items-end gap-4 mt-auto">
