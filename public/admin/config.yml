@@ -12,6 +12,7 @@ collections:
   - name: "productos"
     label: "Catálogo de Perfumes"
     folder: "src/data"
+    create: true 
     extension: "json"
     format: "json"
     identifier_field: "id"
@@ -36,6 +37,7 @@ collections:
   - name: "combos"
     label: "Combos Especiales"
     folder: "src/data"
+    create: true 
     extension: "json"
     format: "json"
     identifier_field: "id"
