@@ -1,0 +1,27 @@
+{
+  "notas_olfativas": "Vainilla, Lavanda",
+  "nombre": "Born in Roma Intense",
+  "precio_base": 200,
+  "descripcion": "Texto prueba",
+  "categoria": "Diseñador",
+  "imagen": "public/images/perfume-valentino-born-in-roma-uomo-intense-edp-m-100-ml-3-prive-perfumes.webp",
+  "variantes": [
+    {
+      "en_stock": true,
+      "tamaño": "Decant 2ml",
+      "precio": 200
+    },
+    {
+      "en_stock": true,
+      "tamaño": "Decant 5ml",
+      "precio": 350
+    },
+    {
+      "en_stock": true,
+      "tamaño": "Decant 10ml",
+      "precio": 550
+    }
+  ],
+  "id": "valentino-bir-intense",
+  "marca": "Valentino"
+}
