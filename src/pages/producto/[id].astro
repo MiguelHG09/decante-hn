@@ -4,7 +4,7 @@ import ProductCard from '../../components/ProductCard.astro';
 
 export function getStaticPaths() {
   const productosGlob = import.meta.glob('../../data/productos/*.json', { eager: true });
-  const productos = Object.values(productosGlob).map(file => file.default);
+  const productos = Object.values(productosGlob).map((file: any) => file.default);
 
   return productos.map((producto) => ({
     params: { id: producto.id },
@@ -13,9 +13,9 @@ export function getStaticPaths() {
 }
 
 const { producto, todosLosProductos } = Astro.props;
-const relacionados = todosLosProductos.filter(p => p.id !== producto.id).slice(0, 4);
+const relacionados = todosLosProductos.filter((p: any) => p.id !== producto.id).slice(0, 4);
 
-// Convertimos el texto "Vainilla, Lavanda" del CMS en etiquetas separadas
+// Convertimos el texto "Vainilla, Lavanda" del CMS en etiquetas separadas (Tags)
 const notasOlfativasArray = typeof producto.notas_olfativas === 'string' 
     ? producto.notas_olfativas.split(',').map(n => n.trim()) 
     : (producto.notas_olfativas || []);
@@ -32,62 +32,64 @@ const notasOlfativasArray = typeof producto.notas_olfativas === 'string'
             
             <!-- Área de Detalles -->
             <div class="flex flex-col justify-center px-0 md:px-8" id="pdp-container">
-                <span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-4">{producto.marca}</span>
-                <h1 class="font-headline-lg text-headline-lg text-primary mb-6">{producto.nombre}</h1>
+                <span class="font-sans text-[14px] font-semibold text-secondary uppercase tracking-[0.15em] mb-4">{producto.marca}</span>
+                <h1 class="font-serif text-[40px] md:text-[48px] text-primary mb-6 leading-tight">{producto.nombre}</h1>
                 
-                <!-- RENDERIZADO DE NOTAS OLFATIVAS -->
+                <!-- RENDERIZADO DE NOTAS OLFATIVAS COMO TAGS -->
                 {notasOlfativasArray.length > 0 && (
                     <div class="flex flex-wrap gap-2 mb-8">
-                        {notasOlfativasArray.map(nota => (
-                            <span class="px-4 py-1 border border-outline-variant text-secondary font-label-md text-[12px] uppercase tracking-widest bg-surface-bright">
+                        {notasOlfativasArray.map((nota: string) => (
+                            <span class="px-4 py-1.5 border border-outline-variant text-secondary font-sans text-[11px] font-semibold uppercase tracking-[0.1em] bg-[#f6f3f2]">
                                 {nota}
                             </span>
                         ))}
                     </div>
                 )}
 
-                <p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed max-w-lg">
+                <p class="font-sans text-[16px] text-on-surface-variant mb-8 leading-relaxed max-w-lg">
                     {producto.descripcion || "Una masterclass en quiet luxury. Rare oud wood, exotic spices, and cardamom blend seamlessly to create an intoxicating, smoky aroma."}
                 </p>
                 
-                <!-- Variantes -->
-<div class="mb-8">
-    <span class="font-sans text-[12px] font-semibold text-primary uppercase tracking-[0.1em] block mb-4">Tamaño</span>
-    <div class="flex flex-wrap gap-4" id="variant-container">
-        {producto.variantes && producto.variantes.map((variante, index) => (
-            <button 
-                class={`variant-btn px-6 py-3 border font-sans text-[12px] font-semibold uppercase tracking-widest transition-all duration-300 cursor-pointer ${
-                    index === 0 
-                    ? 'bg-primary border-primary text-white' 
-                    : 'bg-transparent border-outline-variant text-secondary hover:bg-primary hover:border-primary hover:text-white'
-                }`}
-                data-precio={variante.precio}
-                data-tamaño={variante.tamaño}
-            >
-                {variante.tamaño}
-            </button>
-        ))}
-    </div>
-</div>
+                <!-- Variantes / Tamaños -->
+                <div class="mb-8">
+                    <span class="font-sans text-[12px] font-semibold text-primary uppercase tracking-[0.1em] block mb-4">Tamaño</span>
+                    <div class="flex flex-wrap gap-4" id="contenedor-variantes">
+                        {producto.variantes && producto.variantes.map((variante: any, index: number) => (
+                            <button
+                                type="button"
+                                class={`btn-variante px-6 py-3 border font-sans text-[12px] font-semibold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer ${
+                                    index === 0
+                                    ? 'bg-primary border-primary text-white' // El primero siempre activo por defecto
+                                    : 'bg-transparent border-outline-variant text-secondary hover:border-primary hover:text-primary' // Los demás inactivos
+                                }`}
+                                data-precio={variante.precio}
+                                data-tamaño={variante.tamaño}
+                            >
+                                {variante.tamaño}
+                            </button>
+                        ))}
+                    </div>
+                </div>
                 
-                <!-- Acciones -->
+                <!-- Acciones (Cantidad y Carrito) -->
                 <div class="flex items-end gap-4 mt-auto">
                     <div class="flex flex-col gap-2">
-                        <span class="font-label-md text-label-md text-secondary uppercase">Cantidad</span>
+                        <span class="font-sans text-[12px] font-semibold text-secondary uppercase tracking-[0.1em]">Cantidad</span>
                         <div class="flex items-center border border-outline-variant h-14 w-32 bg-white">
                             <button id="pdp-minus" class="flex-1 h-full text-secondary hover:text-primary transition-colors flex items-center justify-center cursor-pointer text-2xl font-light">-</button>
-                            <span id="pdp-qty" class="font-body-lg text-body-lg text-primary w-10 text-center font-medium">1</span>
+                            <span id="pdp-qty" class="font-sans text-[16px] text-primary w-10 text-center font-medium">1</span>
                             <button id="pdp-plus" class="flex-1 h-full text-secondary hover:text-primary transition-colors flex items-center justify-center cursor-pointer text-2xl font-light">+</button>
                         </div>
                     </div>
+                    
                     <button 
-                        id="pdp-add-to-cart" 
-                        class="flex-1 h-14 bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                        id="btn-agregar-carrito" 
+                        class="flex-1 h-14 bg-primary-container text-white font-sans text-[13px] font-semibold uppercase tracking-[0.1em] hover:bg-primary transition-colors flex items-center justify-center gap-2"
                         data-id={producto.id}
                         data-nombre={producto.nombre}
                         data-imagen={producto.imagen}
                     >
-                        Agregar al Carrito - L. <span id="pdp-btn-price">{producto.variantes.find(v => v.en_stock)?.precio || 0}</span>
+                        AGREGAR AL CARRITO - L. <span id="pdp-btn-price">{producto.variantes[0].precio}</span>
                     </button>
                 </div>
             </div>
@@ -95,10 +97,10 @@ const notasOlfativasArray = typeof producto.notas_olfativas === 'string'
 
         <!-- Productos Relacionados -->
         {relacionados.length > 0 && (
-            <section class="mb-section-gap">
-                <h2 class="font-headline-md text-headline-md text-primary mb-12 text-center md:text-left">También te podría gustar</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-                    {relacionados.map((rel) => (
+            <section class="mb-[120px] mt-16 border-t border-outline-variant pt-16">
+                <h2 class="font-serif text-[32px] text-primary mb-12 text-center">También te podría gustar</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {relacionados.map((rel: any) => (
                         <ProductCard producto={rel} />
                     ))}
                 </div>
@@ -110,64 +112,82 @@ const notasOlfativasArray = typeof producto.notas_olfativas === 'string'
 <script>
     import { addCartItem } from '../../store/cartStore.js';
 
-    const container = document.getElementById('pdp-container');
-    
-    if (container) {
-        let currentQty = 1;
-        const initialActiveBtn = container.querySelector('.variant-btn.active-variant');
-        let currentPrice = initialActiveBtn ? parseInt(initialActiveBtn.dataset.precio) : 0;
-        let currentVariant = initialActiveBtn ? initialActiveBtn.dataset.tamaño : '';
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('pdp-container');
+        
+        if (container) {
+            const variantButtons = container.querySelectorAll('.btn-variante') as NodeListOf<HTMLButtonElement>;
+            const qtyDisplay = document.getElementById('pdp-qty');
+            const priceDisplay = document.getElementById('pdp-btn-price');
+            const addToCartBtn = document.getElementById('btn-agregar-carrito');
+            const btnPlus = document.getElementById('pdp-plus');
+            const btnMinus = document.getElementById('pdp-minus');
 
-        const qtyDisplay = document.getElementById('pdp-qty');
-        const priceDisplay = document.getElementById('pdp-btn-price');
-        const addToCartBtn = document.getElementById('pdp-add-to-cart');
-        const variantButtons = container.querySelectorAll('.variant-btn');
+            // Cargar datos iniciales del primer botón (que está activo por defecto en el HTML)
+            let currentQty = 1;
+            let currentPrice = parseInt(variantButtons[0]?.getAttribute('data-precio') || '0');
+            let currentVariant = variantButtons[0]?.getAttribute('data-tamaño') || '';
 
-        variantButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                if (btn.disabled) return;
-                variantButtons.forEach(b => {
-                    b.classList.remove('bg-primary', 'text-on-primary', 'border-primary', 'active-variant');
-                    b.classList.add('border-outline-variant', 'text-secondary');
-                });
-                btn.classList.remove('border-outline-variant', 'text-secondary');
-                btn.classList.add('bg-primary', 'text-on-primary', 'border-primary', 'active-variant');
-                currentVariant = btn.dataset.tamaño;
-                currentPrice = parseInt(btn.dataset.precio);
-                updatePriceUI();
-            });
-        });
+            // Clases puras de Tailwind para los estados (así evitamos bugs de hover)
+            const claseActiva = "btn-variante px-6 py-3 border font-sans text-[12px] font-semibold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer bg-primary border-primary text-white";
+            const claseInactiva = "btn-variante px-6 py-3 border font-sans text-[12px] font-semibold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer bg-transparent border-outline-variant text-secondary hover:border-primary hover:text-primary";
 
-        document.getElementById('pdp-plus').addEventListener('click', () => {
-            currentQty++;
-            qtyDisplay.innerText = currentQty;
-            updatePriceUI();
-        });
-
-        document.getElementById('pdp-minus').addEventListener('click', () => {
-            if (currentQty > 1) {
-                currentQty--;
-                qtyDisplay.innerText = currentQty;
-                updatePriceUI();
+            function updatePriceUI() {
+                if(priceDisplay) priceDisplay.innerText = (currentPrice * currentQty).toString();
             }
-        });
 
-        function updatePriceUI() {
-            if(priceDisplay) priceDisplay.innerText = currentPrice * currentQty;
-        }
-
-        addToCartBtn.addEventListener('click', () => {
-            if(currentVariant === '') return;
-            addCartItem({
-                id: addToCartBtn.dataset.id,
-                nombre: addToCartBtn.dataset.nombre,
-                imagen: addToCartBtn.dataset.imagen,
-                tamaño: currentVariant,
-                precio: currentPrice,
-                cantidad: currentQty
+            // Lógica de Selección de Tamaños
+            variantButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 1. Resetear todos los botones a inactivos usando la cadena de clases completa
+                    variantButtons.forEach(b => {
+                        b.className = claseInactiva;
+                    });
+                    
+                    // 2. Poner activo solo el que recibió el clic
+                    this.className = claseActiva;
+                    
+                    // 3. Actualizar variables de memoria
+                    currentPrice = parseInt(this.getAttribute('data-precio') || '0');
+                    currentVariant = this.getAttribute('data-tamaño') || '';
+                    
+                    // 4. Reflejar nuevo precio en la pantalla
+                    updatePriceUI();
+                });
             });
-            document.getElementById('cart-sidebar').classList.remove('translate-x-full');
-            document.getElementById('cart-overlay').classList.remove('hidden');
-        });
-    }
+
+            // Lógica de Cantidad
+            btnPlus?.addEventListener('click', () => {
+                currentQty++;
+                if (qtyDisplay) qtyDisplay.innerText = currentQty.toString();
+                updatePriceUI();
+            });
+
+            btnMinus?.addEventListener('click', () => {
+                if (currentQty > 1) {
+                    currentQty--;
+                    if (qtyDisplay) qtyDisplay.innerText = currentQty.toString();
+                    updatePriceUI();
+                }
+            });
+
+            // Lógica de Agregar al Carrito
+            addToCartBtn?.addEventListener('click', () => {
+                if(currentVariant === '') return;
+                
+                addCartItem({
+                    id: addToCartBtn.getAttribute('data-id'),
+                    nombre: addToCartBtn.getAttribute('data-nombre'),
+                    imagen: addToCartBtn.getAttribute('data-imagen'),
+                    tamaño: currentVariant,
+                    precio: currentPrice,
+                    cantidad: currentQty
+                });
+                
+                // Mostrar el carrito lateral
+                document.getElementById('cart-sidebar')?.classList.remove('translate-x-full');
+                document.getElementById('cart-overlay')?.classList.remove('hidden');
+            });
+        }
+    });
 </script>
