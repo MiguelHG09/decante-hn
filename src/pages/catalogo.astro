@@ -281,24 +281,24 @@ const notasUnicas = [...new Set(todasLasNotas)].sort();
                             data-notas={dataNotas.toLowerCase()}
                             data-precio={producto.precio_base}
                         >
-                            <div class="w-full aspect-square bg-[#f6f3f2] relative overflow-hidden mb-6 flex items-center justify-center p-8 border border-outline-variant">
+                            <div class="w-full aspect-square bg-[#f6f3f2] relative overflow-hidden mb-6 border border-outline-variant">
                                 <img
                                     src={producto.imagen}
                                     alt={producto.nombre}
-                                    class="object-contain w-full h-full mix-blend-multiply transition-opacity duration-500 absolute inset-8 group-hover:opacity-0"
+                                    class="absolute inset-0 w-full h-full p-8 object-contain mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0"
                                 />
                                 {imagenVariante && (
                                     <img
                                         src={imagenVariante}
                                         alt={`${producto.nombre} variante`}
-                                        class="object-contain w-full h-full mix-blend-multiply transition-opacity duration-500 absolute inset-8 opacity-0 group-hover:opacity-100"
+                                        class="absolute inset-0 w-full h-full p-8 object-contain mix-blend-multiply transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                                     />
                                 )}
                                 {!imagenVariante && (
                                     <img
                                         src={producto.imagen}
                                         alt={producto.nombre}
-                                        class="object-contain w-full h-full mix-blend-multiply transition-transform duration-700 absolute inset-8 opacity-0 group-hover:opacity-100 group-hover:scale-110"
+                                        class="absolute inset-0 w-full h-full p-8 object-contain mix-blend-multiply transition-transform duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-110"
                                     />
                                 )}
                             </div>
