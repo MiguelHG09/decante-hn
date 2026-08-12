@@ -3,6 +3,7 @@
   "nombre": "Born in Roma Intense",
   "precio_base": 200,
   "descripcion": "Texto prueba",
+  "genero": "Hombre",
   "categoria": "Diseñador",
   "imagen": "https://priveperfumes.com/cdn/shop/files/perfume-valentino-born-in-roma-uomo-intense-edp-m-100-ml-3-prive-perfumes.webp?v=1778932836&width=700",
   "variantes": [
@@ -14,7 +15,8 @@
     {
       "en_stock": true,
       "tamaño": "Decant 5ml",
-      "precio": 350
+      "precio": 350,
+      "imagen_variante": "https://nextcell.com.ar/wp-content/uploads/2025/09/Screenshot_11.png"
     },
     {
       "en_stock": true,
