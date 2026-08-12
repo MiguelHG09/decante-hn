@@ -1,128 +1,528 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Magia: Astro lee todos los JSON individuales creados por el CMS
-const productosGlob = import.meta.glob('../data/productos/*.json', { eager: true });
-const productos = Object.values(productosGlob).map(file => file.default);
+const productosGlob = import.meta.glob("../data/productos/*.json", {
+    eager: true,
+});
+const productos = Object.values(productosGlob).map((file: any) => file.default);
 
-const marcasUnicas = [...new Set(productos.map(p => p.marca))];
-const categoriasUnicas = [...new Set(productos.map(p => p.categoria))];
+const marcasUnicas = [...new Set(productos.map((p) => p.marca))].sort();
+const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))].sort();
+const generosUnicos = ["Hombre", "Mujer", "Unisex"];
+
+let todasLasNotas: string[] = [];
+productos.forEach((p) => {
+    if (typeof p.notas_olfativas === "string") {
+        const notas = p.notas_olfativas.split(",").map((n) => n.trim());
+        todasLasNotas = [...todasLasNotas, ...notas];
+    }
+});
+const notasUnicas = [...new Set(todasLasNotas)].sort();
 ---
 
-<Layout title="Catálogo Completo">
-    <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-24">
-        
-        <header class="mb-16 text-center md:text-left">
-            <h1 class="font-display-lg text-display-lg text-primary mb-4">Colección Completa</h1>
-            <p class="font-body-lg text-body-lg text-secondary max-w-2xl">Explora nuestra cuidada selección de fragancias nicho y de diseñador. Descubre el arte de la perfumería fina, decantada con precisión y cuidado.</p>
+<Layout title="Catálogo de Fragancias">
+    <main
+        class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[120px]"
+    >
+        <header class="mb-12 text-center md:text-left">
+            <h1
+                class="font-serif text-[48px] md:text-[64px] font-bold text-primary mb-4"
+            >
+                Colección Completa
+            </h1>
+            <p
+                class="font-sans text-[16px] md:text-[18px] text-secondary max-w-2xl"
+            >
+                Explora nuestra selección. Usa los filtros para encontrar tu
+                fragancia ideal.
+            </p>
         </header>
 
-        <!-- Filtros -->
-        <section class="flex flex-col md:flex-row gap-4 mb-section-gap border-b border-surface-container-highest pb-8">
-            <!-- Filtro Categoría -->
-            <div class="relative w-full md:w-64">
-                <select id="filter-categoria" class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
-                    <option value="all">Todas las Categorías</option>
-                    {categoriasUnicas.map(cat => <option value={cat.toLowerCase()}>{cat}</option>)}
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
-                    <span class="material-symbols-outlined text-sm">expand_more</span>
+        <!-- Barra de Controles: Filtros Custom -->
+        <section
+            class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-16 pb-8 border-b border-outline-variant"
+        >
+            <div class="flex flex-wrap gap-4 w-full lg:w-auto z-20">
+                <!-- Dropdown Género -->
+                <div class="relative custom-dropdown w-full md:w-48">
+                    <button
+                        class="dropdown-trigger w-full flex justify-between items-center bg-surface border border-outline-variant py-3 px-4 font-sans text-[12px] uppercase tracking-widest text-primary hover:border-primary transition-colors"
+                    >
+                        <span class="selected-text truncate">Género</span>
+                        <svg
+                            class="h-4 w-4 text-secondary ml-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            ><path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path></svg
+                        >
+                    </button>
+                    <div
+                        class="dropdown-menu hidden absolute left-0 top-full mt-1 w-full bg-white border border-outline-variant shadow-lg max-h-60 overflow-y-auto"
+                    >
+                        <label
+                            class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer cursor-pointer border-b border-outline-variant/50"
+                        >
+                            <input
+                                type="radio"
+                                name="genero"
+                                value=""
+                                checked
+                                class="mr-3 accent-primary"
+                            />
+                            <span
+                                class="font-sans text-[12px] uppercase tracking-wider text-secondary"
+                                >Todos</span
+                            >
+                        </label>
+                        {
+                            generosUnicos.map((gen) => (
+                                <label class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="genero"
+                                        value={gen}
+                                        class="mr-3 accent-primary"
+                                    />
+                                    <span class="font-sans text-[12px] uppercase tracking-wider text-primary">
+                                        {gen}
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Dropdown Categoría -->
+                <div class="relative custom-dropdown w-full md:w-48">
+                    <button
+                        class="dropdown-trigger w-full flex justify-between items-center bg-surface border border-outline-variant py-3 px-4 font-sans text-[12px] uppercase tracking-widest text-primary hover:border-primary transition-colors"
+                    >
+                        <span class="selected-text truncate">Categoría</span>
+                        <svg
+                            class="h-4 w-4 text-secondary ml-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            ><path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path></svg
+                        >
+                    </button>
+                    <div
+                        class="dropdown-menu hidden absolute left-0 top-full mt-1 w-full bg-white border border-outline-variant shadow-lg max-h-60 overflow-y-auto"
+                    >
+                        <label
+                            class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer border-b border-outline-variant/50"
+                        >
+                            <input
+                                type="radio"
+                                name="categoria"
+                                value=""
+                                checked
+                                class="mr-3 accent-primary"
+                            />
+                            <span
+                                class="font-sans text-[12px] uppercase tracking-wider text-secondary"
+                                >Todas</span
+                            >
+                        </label>
+                        {
+                            categoriasUnicas.map((cat) => (
+                                <label class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="categoria"
+                                        value={cat}
+                                        class="mr-3 accent-primary"
+                                    />
+                                    <span class="font-sans text-[12px] uppercase tracking-wider text-primary">
+                                        {cat}
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Dropdown Multi-Select: Notas Olfativas -->
+                <div class="relative custom-dropdown w-full md:w-56">
+                    <button
+                        class="dropdown-trigger w-full flex justify-between items-center bg-surface border border-outline-variant py-3 px-4 font-sans text-[12px] uppercase tracking-widest text-primary hover:border-primary transition-colors"
+                    >
+                        <span class="selected-text truncate"
+                            >Notas Olfativas</span
+                        >
+                        <svg
+                            class="h-4 w-4 text-secondary ml-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            ><path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path></svg
+                        >
+                    </button>
+                    <div
+                        class="dropdown-menu hidden absolute left-0 top-full mt-1 w-full bg-white border border-outline-variant shadow-lg max-h-60 overflow-y-auto z-50"
+                    >
+                        {
+                            notasUnicas.map((nota) => (
+                                <label class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        name="notas"
+                                        value={nota}
+                                        class="mr-3 accent-primary"
+                                    />
+                                    <span class="font-sans text-[12px] uppercase tracking-wider text-primary">
+                                        {nota}
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
-            
-            <!-- Filtro Marca -->
-            <div class="relative w-full md:w-64">
-                <select id="filter-marca" class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
-                    <option value="all">Todas las Marcas</option>
-                    {marcasUnicas.map(marca => <option value={marca.toLowerCase()}>{marca}</option>)}
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
-                    <span class="material-symbols-outlined text-sm">expand_more</span>
-                </div>
-            </div>
-            
-            <!-- Ordenar por Precio -->
-            <div class="relative w-full md:w-64">
-                <select id="sort-precio" class="w-full appearance-none bg-transparent border border-surface-container-highest text-on-surface py-3 px-4 rounded-none font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-0 cursor-pointer transition-colors duration-300">
-                    <option value="default">Ordenar por Precio</option>
-                    <option value="asc">Menor a Mayor</option>
-                    <option value="desc">Mayor a Menor</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary">
-                    <span class="material-symbols-outlined text-sm">expand_more</span>
+
+            <!-- Dropdown Ordenamiento (Derecha) -->
+            <div
+                class="relative custom-dropdown w-full lg:w-48 mt-4 lg:mt-0 z-10"
+            >
+                <button
+                    class="dropdown-trigger w-full flex justify-between items-center bg-[#f6f3f2] border border-outline-variant py-3 px-4 font-sans text-[12px] uppercase tracking-widest text-primary hover:border-primary transition-colors"
+                >
+                    <span class="selected-text truncate">Ordenar por</span>
+                    <svg
+                        class="h-4 w-4 text-secondary ml-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        ><path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path></svg
+                    >
+                </button>
+                <div
+                    class="dropdown-menu hidden absolute right-0 top-full mt-1 w-full lg:w-48 bg-white border border-outline-variant shadow-lg max-h-60 overflow-y-auto"
+                >
+                    <label
+                        class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer"
+                    >
+                        <input
+                            type="radio"
+                            name="orden"
+                            value=""
+                            checked
+                            class="hidden"
+                        />
+                        <span
+                            class="font-sans text-[12px] uppercase tracking-wider text-primary"
+                            >Destacados</span
+                        >
+                    </label>
+                    <label
+                        class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer"
+                    >
+                        <input
+                            type="radio"
+                            name="orden"
+                            value="precio-asc"
+                            class="hidden"
+                        />
+                        <span
+                            class="font-sans text-[12px] uppercase tracking-wider text-primary"
+                            >Precio: Menor a Mayor</span
+                        >
+                    </label>
+                    <label
+                        class="flex items-center px-4 py-3 hover:bg-[#f6f3f2] cursor-pointer"
+                    >
+                        <input
+                            type="radio"
+                            name="orden"
+                            value="precio-desc"
+                            class="hidden"
+                        />
+                        <span
+                            class="font-sans text-[12px] uppercase tracking-wider text-primary"
+                            >Precio: Mayor a Menor</span
+                        >
+                    </label>
                 </div>
             </div>
         </section>
 
         <!-- Cuadrícula de Productos -->
-        <section id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-section-gap">
-            {productos.map((prod) => (
-                <div 
-                    class="product-item transition-opacity duration-300"
-                    data-categoria={prod.categoria.toLowerCase()}
-                    data-marca={prod.marca.toLowerCase()}
-                    data-precio={prod.precio_base}
-                >
-                    <ProductCard producto={prod} />
-                </div>
-            ))}
+        <section
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter"
+            id="grid-productos"
+        >
+            {
+                productos.map((producto) => {
+                    const dataNotas =
+                        typeof producto.notas_olfativas === "string"
+                            ? producto.notas_olfativas
+                            : "";
+                    const imagenVariante = producto.variantes?.find(
+                        (v: any) => v.imagen_variante,
+                    )?.imagen_variante;
+                    const genero = producto.genero ? producto.genero : "";
+
+                    return (
+                        <a
+                            href={`/producto/${producto.id}`}
+                            class="tarjeta-producto group flex flex-col"
+                            data-categoria={producto.categoria}
+                            data-marca={producto.marca}
+                            data-genero={genero.toLowerCase()}
+                            data-notas={dataNotas.toLowerCase()}
+                            data-precio={producto.precio_base}
+                        >
+                            <div class="w-full aspect-square bg-[#f6f3f2] relative overflow-hidden mb-6 flex items-center justify-center p-8 border border-outline-variant">
+                                <img
+                                    src={producto.imagen}
+                                    alt={producto.nombre}
+                                    class="object-contain w-full h-full mix-blend-multiply transition-opacity duration-500 absolute inset-8 group-hover:opacity-0"
+                                />
+                                {imagenVariante && (
+                                    <img
+                                        src={imagenVariante}
+                                        alt={`${producto.nombre} variante`}
+                                        class="object-contain w-full h-full mix-blend-multiply transition-opacity duration-500 absolute inset-8 opacity-0 group-hover:opacity-100"
+                                    />
+                                )}
+                                {!imagenVariante && (
+                                    <img
+                                        src={producto.imagen}
+                                        alt={producto.nombre}
+                                        class="object-contain w-full h-full mix-blend-multiply transition-transform duration-700 absolute inset-8 opacity-0 group-hover:opacity-100 group-hover:scale-110"
+                                    />
+                                )}
+                            </div>
+
+                            <div class="flex flex-col text-center px-4 mb-8">
+                                <span class="font-sans text-[12px] font-semibold text-secondary uppercase tracking-[0.15em] mb-2">
+                                    {producto.marca}
+                                </span>
+                                <h3 class="font-serif text-[24px] text-primary mb-3 truncate">
+                                    {producto.nombre}
+                                </h3>
+                                <span class="font-sans text-[16px] font-medium text-primary">
+                                    Desde L. {producto.precio_base}
+                                </span>
+                            </div>
+                        </a>
+                    );
+                })
+            }
         </section>
 
-        <p id="no-results-msg" class="hidden text-center text-secondary font-body-lg mb-section-gap">No se encontraron productos con estos filtros.</p>
-
+        <!-- Mensaje de no resultados -->
+        <div id="no-resultados" class="hidden text-center py-16">
+            <h2 class="font-serif text-[28px] text-primary mb-4">
+                No encontramos fragancias
+            </h2>
+            <p class="font-sans text-secondary">
+                Intenta ajustando los filtros de búsqueda.
+            </p>
+        </div>
     </main>
 </Layout>
 
 <script>
-    const filterCategoria = document.getElementById('filter-categoria');
-    const filterMarca = document.getElementById('filter-marca');
-    const sortPrecio = document.getElementById('sort-precio');
-    const grid = document.getElementById('product-grid');
-    const noResultsMsg = document.getElementById('no-results-msg');
+    document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.getElementById("grid-productos");
+        const tarjetas = document.querySelectorAll(
+            ".tarjeta-producto",
+        ) as NodeListOf<HTMLElement>;
+        const noResultados = document.getElementById("no-resultados");
+        let tarjetasArray = Array.from(tarjetas);
 
-    function applyFilters() {
-        const catValue = filterCategoria.value;
-        const marcaValue = filterMarca.value;
-        const sortValue = sortPrecio.value;
-        
-        let itemsArray = Array.from(grid.querySelectorAll('.product-item'));
-        let visibleCount = 0;
+        // Lógica para los menús desplegables personalizados
+        const dropdowns = document.querySelectorAll(".custom-dropdown");
 
-        // 1. Filtrar
-        itemsArray.forEach(item => {
-            const matchCat = catValue === 'all' || item.dataset.categoria === catValue;
-            const matchMarca = marcaValue === 'all' || item.dataset.marca === marcaValue;
+        dropdowns.forEach((dropdown) => {
+            const trigger = dropdown.querySelector(
+                ".dropdown-trigger",
+            ) as HTMLButtonElement;
+            const menu = dropdown.querySelector(
+                ".dropdown-menu",
+            ) as HTMLDivElement;
 
-            if (matchCat && matchMarca) {
-                item.style.display = 'block';
-                visibleCount++;
-            } else {
-                item.style.display = 'none';
+            // Abrir/Cerrar menú
+            trigger.addEventListener("click", (e) => {
+                e.stopPropagation(); // Evita que el click cierre inmediatamente el menú
+                // Cerrar los demás menús antes de abrir este
+                document.querySelectorAll(".dropdown-menu").forEach((m) => {
+                    if (m !== menu) m.classList.add("hidden");
+                });
+                menu.classList.toggle("hidden");
+            });
+        });
+
+        // Cerrar menús al hacer click afuera
+        document.addEventListener("click", (e) => {
+            if (!(e.target as Element).closest(".custom-dropdown")) {
+                document
+                    .querySelectorAll(".dropdown-menu")
+                    .forEach((menu) => menu.classList.add("hidden"));
             }
         });
 
-        // 2. Ordenar los visibles
-        if (sortValue !== 'default') {
-            const sortedItems = itemsArray.sort((a, b) => {
-                const precioA = parseInt(a.dataset.precio);
-                const precioB = parseInt(b.dataset.precio);
-                return sortValue === 'asc' ? precioA - precioB : precioB - precioA;
+        // Función Maestra de Filtrado y Ordenamiento
+        function aplicarFiltrosYOrden() {
+            // Leer valores seleccionados
+            const catFiltro =
+                (
+                    document.querySelector(
+                        'input[name="categoria"]:checked',
+                    ) as HTMLInputElement
+                )?.value.toLowerCase() || "";
+            const genFiltro =
+                (
+                    document.querySelector(
+                        'input[name="genero"]:checked',
+                    ) as HTMLInputElement
+                )?.value.toLowerCase() || "";
+            const ordenFiltro =
+                (
+                    document.querySelector(
+                        'input[name="orden"]:checked',
+                    ) as HTMLInputElement
+                )?.value || "";
+
+            // Recoger TODAS las notas que estén chequeadas (Multi-Select)
+            const notasCheckboxes = document.querySelectorAll(
+                'input[name="notas"]:checked',
+            ) as NodeListOf<HTMLInputElement>;
+            const notasSeleccionadas = Array.from(notasCheckboxes).map((cb) =>
+                cb.value.toLowerCase(),
+            );
+
+            let visibles = 0;
+
+            // 1. Filtrar
+            tarjetasArray.forEach((tarjeta) => {
+                const pCat = tarjeta.dataset.categoria?.toLowerCase() || "";
+                const pGen = tarjeta.dataset.genero?.toLowerCase() || "";
+                const pNotas = tarjeta.dataset.notas || "";
+
+                const matchCat = catFiltro === "" || pCat === catFiltro;
+                const matchGen = genFiltro === "" || pGen === genFiltro;
+
+                // Si el usuario seleccionó múltiples notas, el perfume debe contenerlas (O al menos una, en este caso exigimos que tenga todas las que seleccionó para ser precisos)
+                const matchNotas = notasSeleccionadas.every((nota) =>
+                    pNotas.includes(nota),
+                );
+
+                if (matchCat && matchGen && matchNotas) {
+                    tarjeta.style.display = "flex";
+                    visibles++;
+                } else {
+                    tarjeta.style.display = "none";
+                }
             });
-            // Reinsertar en el DOM en el nuevo orden
-            sortedItems.forEach(item => grid.appendChild(item));
+
+            // 2. Ordenar en el DOM
+            if (ordenFiltro === "precio-asc") {
+                tarjetasArray.sort(
+                    (a, b) =>
+                        parseInt(a.dataset.precio || "0") -
+                        parseInt(b.dataset.precio || "0"),
+                );
+            } else if (ordenFiltro === "precio-desc") {
+                tarjetasArray.sort(
+                    (a, b) =>
+                        parseInt(b.dataset.precio || "0") -
+                        parseInt(a.dataset.precio || "0"),
+                );
+            } else {
+                // Destacados (Orden original del HTML)
+                tarjetasArray.sort((a, b) => 0);
+            }
+
+            // Aplicar el nuevo orden visualmente
+            if (grid) {
+                tarjetasArray.forEach((t) => grid.appendChild(t));
+            }
+
+            if (noResultados) {
+                noResultados.style.display = visibles === 0 ? "block" : "none";
+            }
         }
 
-        // 3. Mostrar mensaje si no hay resultados
-        if (visibleCount === 0) {
-            noResultsMsg.classList.remove('hidden');
-        } else {
-            noResultsMsg.classList.add('hidden');
+        // Leer la URL para marcar automáticamente una nota si venimos de un Tag en la PDP
+        const urlParams = new URLSearchParams(window.location.search);
+        const notaDesdeUrl = urlParams.get("nota");
+        if (notaDesdeUrl) {
+            const checkbox = document.querySelector(
+                `input[name="notas"][value="${notaDesdeUrl}"]`,
+            ) as HTMLInputElement;
+            if (checkbox) checkbox.checked = true;
         }
-    }
 
-    // Escuchar cambios
-    filterCategoria.addEventListener('change', applyFilters);
-    filterMarca.addEventListener('change', applyFilters);
-    sortPrecio.addEventListener('change', applyFilters);
+        // Disparar los filtros cada vez que cambie cualquier input radio o checkbox
+        document
+            .querySelectorAll('input[type="radio"], input[type="checkbox"]')
+            .forEach((input) => {
+                input.addEventListener("change", (e) => {
+                    const target = e.target as HTMLInputElement;
+
+                    // Actualizar el texto del botón si es un filtro de selección única (radio)
+                    if (target.type === "radio") {
+                        const dropdown = target.closest(".custom-dropdown");
+                        if (dropdown) {
+                            const triggerText =
+                                dropdown.querySelector(".selected-text");
+                            // Si el valor está vacío, regresamos al texto por defecto. Si no, mostramos la opción.
+                            if (triggerText) {
+                                if (target.value === "") {
+                                    if (target.name === "categoria")
+                                        triggerText.textContent = "Categoría";
+                                    if (target.name === "genero")
+                                        triggerText.textContent = "Género";
+                                    if (target.name === "orden")
+                                        triggerText.textContent = "Ordenar por";
+                                } else {
+                                    triggerText.textContent =
+                                        target.nextElementSibling
+                                            ?.textContent || "";
+                                }
+                            }
+                        }
+                    }
+
+                    // Actualizar el texto para las notas (checkboxes)
+                    if (target.type === "checkbox") {
+                        const dropdown = target.closest(".custom-dropdown");
+                        if (dropdown) {
+                            const triggerText =
+                                dropdown.querySelector(".selected-text");
+                            const checkedBoxes = dropdown.querySelectorAll(
+                                'input[type="checkbox"]:checked',
+                            );
+                            if (triggerText) {
+                                if (checkedBoxes.length === 0) {
+                                    triggerText.textContent = "Notas Olfativas";
+                                } else if (checkedBoxes.length === 1) {
+                                    triggerText.textContent =
+                                        checkedBoxes[0].nextElementSibling
+                                            ?.textContent || "";
+                                } else {
+                                    triggerText.textContent = `${checkedBoxes.length} Notas`;
+                                }
+                            }
+                        }
+                    }
+
+                    aplicarFiltrosYOrden();
+                });
+            });
+
+        // Ejecutar al cargar la página
+        aplicarFiltrosYOrden();
+    });
 </script>

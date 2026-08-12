@@ -19,9 +19,10 @@ collections:
       - { label: "ID Único (Ej: mfk-baccarat)", name: "id", widget: "string" }
       - { label: "Nombre del Perfume", name: "nombre", widget: "string" }
       - { label: "Marca", name: "marca", widget: "string" }
+      - { label: "Género", name: "genero", widget: "select", options: ["Hombre", "Mujer", "Unisex"] }
       - { label: "Categoría", name: "categoria", widget: "select", options: ["Nicho", "Diseñador", "Árabe", "Indie"] }
       - { label: "Precio Base (L.)", name: "precio_base", widget: "number" }
-      - { label: "Imagen", name: "imagen", widget: "image" }
+      - { label: "Imagen Principal (Portada)", name: "imagen", widget: "image" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
       - { label: "Notas Olfativas (Separadas por coma)", name: "notas_olfativas", widget: "string", hint: "Ej: Vainilla, Cítrico, Madera" }
       - label: "Variantes / Tamaños"
@@ -30,6 +31,7 @@ collections:
         fields:
           - { label: "Tamaño (Ej: Decant 5ml)", name: "tamaño", widget: "string" }
           - { label: "Precio (L.)", name: "precio", widget: "number" }
+          - { label: "Foto Específica del Decant (Opcional)", name: "imagen_variante", widget: "image", required: false }
           - { label: "¿Está en stock?", name: "en_stock", widget: "boolean", default: true }
 
   - name: "combos"

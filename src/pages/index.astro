@@ -3,14 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 
 const combosGlob = import.meta.glob('../data/combos/*.json', { eager: true });
-const combos = Object.values(combosGlob).map(file => file.default);
+const combos = Object.values(combosGlob).map((file: any) => file.default);
 
 const productosGlob = import.meta.glob('../data/productos/*.json', { eager: true });
-const productos = Object.values(productosGlob).map(file => file.default);
+const productos = Object.values(productosGlob).map((file: any) => file.default);
 
-const combosMapeados = combos.map(combo => {
-    const itemsCompletos = combo.productos_incluidos.map(itemRel => {
-        const prodData = productos.find(p => p.id === itemRel.id);
+const combosMapeados = combos.map((combo: any) => {
+    const itemsCompletos = combo.productos_incluidos.map((itemRel: any) => {
+        const prodData = productos.find((p: any) => p.id === itemRel.id);
         return { ...prodData, tamaño_incluido: itemRel.tamaño_incluido };
     });
     return { ...combo, items: itemsCompletos };
@@ -39,23 +39,22 @@ const combosMapeados = combos.map(combo => {
             <h2 class="font-serif text-[48px] font-semibold text-primary mb-8 text-center">Combos Especiales</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        <!-- CARRUSEL MÓVIL / GRID DESKTOP -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-gutter pb-8 hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
             {combosMapeados.map((combo) => (
-                <div class="group flex flex-col bg-surface-container-low border border-outline-variant relative">
+                <div class="group flex flex-col bg-surface-container-low border border-outline-variant relative snap-start shrink-0 w-[85vw] md:w-auto">
                     <!-- Foto del Combo -->
                     <div class="w-full aspect-square overflow-hidden relative">
                         <img src={combo.imagen} alt={combo.nombre} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
                     </div>
                     
-                    <!-- Detalles y Relaciones -->
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="font-serif text-[28px] text-primary mb-2">{combo.nombre}</h3>
                         <p class="font-sans text-[14px] text-on-surface-variant mb-6">{combo.descripcion}</p>
                         
-                        <!-- Lista de Perfumes Incluidos con Links Mágicos -->
                         <div class="mb-6 space-y-2 border-l-2 border-primary-container pl-4">
                             <span class="font-sans text-[12px] font-semibold uppercase tracking-widest text-secondary block mb-3">Incluye:</span>
-                            {combo.items.map(item => (
+                            {combo.items.map((item:any) => (
                                 <a href={`/producto/${item.id}`} class="block group/link">
                                     <p class="font-sans text-[15px] font-medium text-primary group-hover/link:underline decoration-1 underline-offset-2">
                                         {item.marca} {item.nombre}
@@ -65,10 +64,8 @@ const combosMapeados = combos.map(combo => {
                             ))}
                         </div>
 
-                        <!-- Precio y Botón de WHA directo -->
                         <div class="mt-auto pt-4 flex items-center justify-between border-t border-outline-variant">
                             <p class="font-sans text-[22px] font-bold text-primary">L. {combo.precio_total}</p>
-                            
                             <button 
                                 class="add-combo-btn bg-primary-container text-white px-4 py-2 font-sans text-[12px] uppercase font-semibold tracking-wider hover:bg-primary transition-colors cursor-pointer"
                                 data-id={combo.id}
@@ -91,17 +88,17 @@ const combosMapeados = combos.map(combo => {
 
     document.querySelectorAll('.add-combo-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const button = e.currentTarget;
+            const button = e.currentTarget as HTMLButtonElement;
             addCartItem({
-                id: button.dataset.id,
-                nombre: button.dataset.nombre,
-                imagen: button.dataset.imagen,
+                id: button.getAttribute('data-id'),
+                nombre: button.getAttribute('data-nombre'),
+                imagen: button.getAttribute('data-imagen'),
                 tamaño: "Paquete Completo", // Tamaño genérico para combos
-                precio: parseInt(button.dataset.precio),
+                precio: parseInt(button.getAttribute('data-precio') || '0'),
                 cantidad: 1
             });
-            document.getElementById('cart-sidebar').classList.remove('translate-x-full');
-            document.getElementById('cart-overlay').classList.remove('hidden');
+            document.getElementById('cart-sidebar')?.classList.remove('translate-x-full');
+            document.getElementById('cart-overlay')?.classList.remove('hidden');
         });
     });
 </script>
